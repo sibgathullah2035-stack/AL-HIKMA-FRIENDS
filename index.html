@@ -1,8 +1,134 @@
 <!DOCTYPE html>
-<html lang="en" class=""><head><script>window.livecodes = window.livecodes || {};</script><title>Untitled Project</title><meta name="title" content="Untitled Project"><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><style id="__livecodes_styles__"></style><script src="https://cdn.jsdelivr.net/npm/es-module-shims@1.10.0/dist/es-module-shims.js" async=""></script><script type="importmap">{
-  "imports": {}
-}</script></head><body>
+<html lang="en" class="">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Al Hikma Friends Batch Union - Darul Huda Islamic University</title>
+        <meta name="title" content="Al Hikma Friends Batch Union - Darul Huda Islamic University">
+        <script src="https://cdn.jsdelivr.net/npm/es-module-shims@1.10.0/dist/es-module-shims.js" async></script>
+        <script type="importmap">{ "imports": {} }</script>
+    <script src="gallery.js" defer></script>
+    <script>
+        // Social Media QR Code functionality
+        const socialData = {
+            instagram: {
+                qrCode: 'https://i.ibb.co/Rp6gTkpc/INST-2-1.png',
+                title: 'Follow us on Instagram',
+                link: 'https://i.ibb.co/Rp6gTkpc/INST-2-1.png',
+                icon: 'fab fa-instagram'
+            },
+            youtube: {
+                qrCode: 'https://i.ibb.co/21kc8fFk/YOU-1.png',
+                title: 'Subscribe to our YouTube Channel',
+                link: 'https://i.ibb.co/21kc8fFk/YOU-1.png',
+                icon: 'fab fa-youtube'
+            },
+            facebook: {
+                qrCode: 'https://i.ibb.co/wy1x3NMQ/facebook-qr.png',
+                title: 'Follow us on Facebook',
+                link: 'https://www.facebook.com/alhikmafriends',
+                icon: 'fab fa-facebook-f'
+            },
+            twitter: {
+                qrCode: 'https://i.ibb.co/xy2y1PMR/twitter-qr.png',
+                title: 'Follow us on Twitter',
+                link: 'https://twitter.com/alhikmafriends',
+                icon: 'fab fa-twitter'
+            }
+        };
+
+        let currentPlatform = '';
+
+        function showQRModal(platform) {
+            currentPlatform = platform;
+            const modal = document.getElementById('qrModal');
+            const qrImage = document.getElementById('qrCodeImage');
+            const title = document.querySelector('#qrModal .modal-title');
+            const instructions = document.getElementById('qrInstructions');
+            const loader = document.getElementById('qrLoader');
+            
+            // Reset and show loading state
+            qrImage.style.opacity = '0';
+            loader.style.display = 'block';
+            
+            // Update modal content
+            title.textContent = socialData[platform].title;
+            instructions.textContent = `Scan this QR code to ${platform === 'youtube' ? 'subscribe to our channel' : 'follow us'}`;
+            
+            // Load image
+            qrImage.src = socialData[platform].qrCode;
+            qrImage.onload = function() {
+                loader.style.display = 'none';
+                qrImage.style.opacity = '1';
+            };
+            
+            modal.style.display = 'flex';
+
+            // Add platform-specific styling
+            const modalContent = document.querySelector('.modal-content');
+            modalContent.style.borderTop = `5px solid var(--${getPlatformColor(platform)})`;
+        }
+
+        function getPlatformColor(platform) {
+            const colors = {
+                instagram: 'gradient-instagram',
+                youtube: 'danger-color',
+                facebook: 'primary-color',
+                twitter: 'info-color'
+            };
+            return colors[platform] || 'primary-color';
+        }
+
+        function closeQRModal() {
+            const modal = document.getElementById('qrModal');
+            const modalContent = document.querySelector('.modal-content');
+            
+            // Animate out
+            modalContent.style.transform = 'scale(0.9)';
+            modalContent.style.opacity = '0';
+            
+            setTimeout(() => {
+                modal.style.display = 'none';
+                modalContent.style.transform = 'scale(1)';
+                modalContent.style.opacity = '1';
+                currentPlatform = '';
+            }, 300);
+        }
+
+        function openSocialLink() {
+            if (currentPlatform && socialData[currentPlatform]) {
+                window.open(socialData[currentPlatform].link, '_blank');
+            }
+        }
+
+        function downloadQR() {
+            if (currentPlatform && socialData[currentPlatform]) {
+                const link = document.createElement('a');
+                link.href = socialData[currentPlatform].qrCode;
+                link.download = `alhikmafriends-${currentPlatform}-qr.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('qrModal');
+            if (event.target === modal) {
+                closeQRModal();
+            }
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && document.getElementById('qrModal').style.display === 'flex') {
+                closeQRModal();
+            }
+        });
+    </script>
+    </head>
+    <body>
 
 
     <meta charset="UTF-8">
@@ -124,6 +250,25 @@
             display: flex;
             gap: 15px;
             align-items: center;
+        }
+        
+        .user-actions a.btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .user-actions {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .user-actions a.btn {
+                width: auto;
+                white-space: nowrap;
+            }
         }
        
         /* Button Styles */
@@ -345,6 +490,29 @@
         }
        
         /* Gallery Section */
+        .gallery-content {
+            display: none;
+        }
+
+        .gallery-content.active {
+            display: block;
+        }
+
+        .gallery-tab {
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .gallery-tab:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        .gallery-tab.active {
+            opacity: 1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -405,6 +573,52 @@
        
         .gallery-item:hover .gallery-overlay i {
             transform: scale(1);
+        }
+        
+        /* Gallery Modal Styles */
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 24px;
+            transition: background 0.3s ease;
+            z-index: 1002;
+        }
+
+        .gallery-nav:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .gallery-nav.prev {
+            left: 20px;
+        }
+
+        .gallery-nav.next {
+            right: 20px;
+        }
+
+        #galleryModalImage {
+            transition: transform 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-nav {
+                padding: 10px 15px;
+                font-size: 20px;
+            }
+
+            .gallery-nav.prev {
+                left: 10px;
+            }
+
+            .gallery-nav.next {
+                right: 10px;
+            }
         }
        
         /* Reports Section */
@@ -1110,6 +1324,45 @@
             color: var(--primary-color);
             transform: translateY(-3px);
         }
+
+        /* Updated QR Modal Styles */
+        #qrContainer {
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        #qrContainer:hover {
+            transform: scale(1.02);
+        }
+
+        #qrCodeImage {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+
+        .gradient-instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        #qrActions button {
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 25px;
+        }
+
+        #qrActions button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        #qrHint {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
        
         .copyright {
             text-align: center;
@@ -1253,6 +1506,116 @@
             background-color: var(--secondary-color);
         }
        
+        /* Core Committee Styles */
+        .committee-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .committee-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .committee-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .committee-image-container {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .committee-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .committee-card:hover .committee-image {
+            transform: scale(1.1);
+        }
+
+        .committee-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 20px;
+            color: white;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .committee-content {
+            padding: 20px;
+        }
+
+        .committee-contact {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .contact-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-button i {
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-button:hover {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .contact-button:hover i {
+            transform: scale(1.1);
+        }
+
+        .contact-button[onclick*="email"] {
+            background: linear-gradient(135deg, #d32f2f, #f44336);
+        }
+
+        .contact-button[onclick*="email"]:hover {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+        }
+
+        @media (max-width: 768px) {
+            .committee-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                padding: 15px;
+            }
+
+            .committee-image-container {
+                height: 200px;
+            }
+        }
+
         /* Admin Dashboard Styles */
         .admin-cards {
             display: grid;
@@ -1668,6 +2031,30 @@
             .user-actions {
                 width: 100%;
                 justify-content: center;
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                padding: 0 10px;
+            }
+
+            .user-actions a.btn {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+                white-space: nowrap;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: auto;
+                min-width: 120px;
+            }
+
+            .user-actions a.btn i {
+                font-size: 0.9rem;
+            }
+
+            .btn-logout {
+                font-size: 0.9rem;
+                padding: 8px 15px;
             }
            
             .profile-container {
@@ -1751,7 +2138,270 @@
                 text-align: center;
             }
         }
+
+        @media (max-width: 480px) {
+            .user-actions {
+                flex-direction: column;
+                padding: 0 20px;
+            }
+
+            .user-actions a.btn {
+                width: 100%;
+                min-width: unset;
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+
+            .logo img {
+                height: 50px;
+            }
+
+            .header-container {
+                padding: 10px;
+            }
+        }
     </style>
+
+    <script>
+        // Committee Members Data
+        const committeeMembers = {
+            president: {
+                name: "Md Zeeshan Khan",
+                image: "https://i.ibb.co/xV9zDwB/cropped-circle-image-15.png",
+                role: "Class President",
+                description: "Leading with vision and dedication to ensure the success of our batch.",
+                phone: "7352126871",
+                email: "mdjishan245@gmail.com"
+            },
+            secretary: {
+                name: "Muhammed Sibgathullah",
+                image: "https://i.ibb.co/xV9zDwB/cropped-circle-image-15.png",
+                role: "Class Secretary",
+                description: "Coordinating activities and maintaining records with precision.",
+                phone: "7894561230",
+                email: "sibgathullah1261@gmail.com"
+            },
+            treasurer: {
+                name: "Md Frioz Alam ",
+                image: "https://i.ibb.co/4RLXbrZF/cropped-circle-image-4.png",
+                role: "Class Treasurer",
+                description: "Managing finances and ensuring transparent fund administration.",
+                phone: "3214569870r",
+                email: "firozalam789@gmail.com"
+            }
+        };
+
+        // Function to render committee members
+        function renderCommitteeMembers() {
+            const container = document.querySelector('.committee-container');
+            if (!container) return;
+
+            container.innerHTML = Object.values(committeeMembers).map(member => `
+                <div class="committee-card">
+                    <div class="committee-image-container">
+                        <img src="${member.image}" alt="${member.role}" class="committee-image" onerror="this.src='https://via.placeholder.com/300x400?text=Committee+Member'">
+                        <div class="committee-info">
+                            <h3>${member.role}</h3>
+                            <p>${member.name}</p>
+                        </div>
+                    </div>
+                    <div class="committee-content">
+                        <p>${member.description}</p>
+                        <div class="committee-contact">
+                            <span class="contact-button" onclick="contactMember('${member.phone}', 'phone')">
+                                <i class="fas fa-phone"></i> Contact
+                            </span>
+                            <span class="contact-button" onclick="contactMember('${member.email}', 'email')">
+                                <i class="fas fa-envelope"></i> Email
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Function to handle contact actions
+        function contactMember(contact, type) {
+            if (type === 'phone') {
+                window.location.href = `tel:${contact}`;
+            } else if (type === 'email') {
+                const subject = 'Contact from Batch Union Website';
+                const body = 'Dear Committee Member,%0D%0A%0D%0A'; // %0D%0A is for line breaks
+                window.location.href = `mailto:${contact}?subject=${encodeURIComponent(subject)}&body=${body}`;
+                // Show toast notification
+                showToast('Opening email client...', 'success');
+            }
+        }
+        
+        // Function to show toast notification
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.classList.add('show'), 100);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialize committee members when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCommitteeMembers();
+        });
+
+        function showGalleryContent(section) {
+            // Remove active class from all tabs and contents
+            document.querySelectorAll('.gallery-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.gallery-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Add active class to selected tab and content
+            document.querySelector(`.gallery-tab[onclick*="${section}"]`).classList.add('active');
+            document.getElementById(`${section}-gallery`).classList.add('active');
+        }
+
+        function openSponsorshipForm() {
+            // Create the modal HTML
+            const modalHTML = `
+                <div class="modal" id="sponsorshipModal" style="display: flex;">
+                    <div class="modal-content" style="max-width: 700px;">
+                        <div class="modal-header" style="background-color: var(--primary-color); color: white; padding: 20px; border-radius: 10px 10px 0 0;">
+                            <h3 class="modal-title" style="font-size: 1.5rem;"><i class="fas fa-handshake"></i> Sponsorship Application</h3>
+                            <span class="close-modal" onclick="closeModal('sponsorshipModal')" style="color: white;">&times;</span>
+                        </div>
+                        <div style="padding: 20px;">
+                            <p style="margin-bottom: 20px; color: var(--text-secondary); text-align: center;">
+                                Your support can make a significant difference in a student's educational journey.
+                            </p>
+                            <form class="modal-form" onsubmit="submitSponsorshipForm(event)">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                    <div class="form-group">
+                                        <label for="sponsorName"><i class="fas fa-user"></i> Full Name</label>
+                                        <input type="text" id="sponsorName" required placeholder="Enter your full name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sponsorOrganization"><i class="fas fa-building"></i> Organization (Optional)</label>
+                                        <input type="text" id="sponsorOrganization" placeholder="Enter your organization name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sponsorEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                                        <input type="email" id="sponsorEmail" required placeholder="Enter your email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sponsorPhone"><i class="fas fa-phone"></i> Phone Number</label>
+                                        <input type="tel" id="sponsorPhone" required placeholder="Enter your phone number">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="sponsorshipType"><i class="fas fa-gift"></i> Type of Sponsorship</label>
+                                    <select id="sponsorshipType" required>
+                                        <option value="">Select Sponsorship Type</option>
+                                        <option value="academic">Academic Scholarship</option>
+                                        <option value="educational">Educational Materials</option>
+                                        <option value="events">Event Sponsorship</option>
+                                        <option value="resources">Learning Resources</option>
+                                        <option value="technology">Technology Support</option>
+                                        <option value="mentorship">Mentorship Program</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sponsorshipDuration"><i class="fas fa-clock"></i> Sponsorship Duration</label>
+                                    <select id="sponsorshipDuration" required>
+                                        <option value="">Select Duration</option>
+                                        <option value="one-time">One-time Contribution</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="quarterly">Quarterly</option>
+                                        <option value="annually">Annually</option>
+                                        <option value="custom">Custom Duration</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sponsorshipAmount"><i class="fas fa-money-bill-wave"></i> Sponsorship Amount Range (Optional)</label>
+                                    <select id="sponsorshipAmount">
+                                        <option value="">Select Amount Range</option>
+                                        <option value="range1">Up to ₹10,000</option>
+                                        <option value="range2">₹10,000 - ₹25,000</option>
+                                        <option value="range3">₹25,000 - ₹50,000</option>
+                                        <option value="range4">₹50,000 - ₹1,00,000</option>
+                                        <option value="range5">Above ₹1,00,000</option>
+                                        <option value="custom">Custom Amount</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="preferredStudents"><i class="fas fa-user-graduate"></i> Preferred Number of Students to Sponsor (Optional)</label>
+                                    <input type="number" id="preferredStudents" min="1" placeholder="Enter number of students">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sponsorMessage"><i class="fas fa-comment-alt"></i> Additional Information</label>
+                                    <textarea id="sponsorMessage" rows="4" required placeholder="Please share any specific requirements, preferences, or questions you may have"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="preferredContact"><i class="fas fa-phone-alt"></i> Preferred Contact Method</label>
+                                    <select id="preferredContact" required>
+                                        <option value="email">Email</option>
+                                        <option value="phone">Phone</option>
+                                        <option value="both">Both Email and Phone</option>
+                                    </select>
+                                </div>
+
+                                <div style="margin: 20px 0;">
+                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                        <input type="checkbox" required>
+                                        <span style="font-size: 0.9rem; color: var(--text-secondary);">I agree to be contacted regarding my sponsorship application</span>
+                                    </label>
+                                </div>
+
+                                <div class="modal-footer" style="gap: 15px;">
+                                    <button type="button" class="btn-cancel" onclick="closeModal('sponsorshipModal')" style="padding: 12px 25px;">
+                                        <i class="fas fa-times"></i> Cancel
+                                    </button>
+                                    <button type="submit" class="btn-confirm" style="padding: 12px 25px; background-color: var(--primary-color);">
+                                        <i class="fas fa-paper-plane"></i> Submit Application
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Add the modal to the document
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        function submitSponsorshipForm(event) {
+            event.preventDefault();
+            // Here you can add code to handle the form submission
+            alert('Thank you for your interest in sponsorship! We will contact you soon.');
+            closeModal('sponsorshipModal');
+        }
+    </script>
 
 
     <!-- Header -->
@@ -1765,26 +2415,46 @@
                 <a href="#" class="active" onclick="showSection('home')">Home</a>
                 <a href="#" onclick="showSection('about')">About Us</a>
                 <a href="#" onclick="showSection('gallery')">Gallery</a>
+                <a href="committee.html">Committee</a>
                 <a href="#" onclick="showSection('reports')">Reports</a>
                 <a href="#" onclick="showSection('awards')">Results</a>
                 <a href="#" onclick="showSection('members')">Members</a>
                 <a href="#" onclick="showSection('contact')">Contact</a>
             </nav>
             <div class="user-actions">
-                <a href="#" class="btn btn-outline" onclick="openLoginOptionsModal()">Login</a>
-               
+                <a href="#" class="btn btn-outline" onclick="openLoginOptionsModal()" style="margin-right: 10px;">Login</a>
+                <a href="#" class="btn" style="
+                    background-color: var(--accent-color);
+                    color: var(--primary-color);
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                    padding: 8px 15px;
+                " onclick="openSponsorshipForm()">
+                    Sponsor
+                </a>
                 <button id="logoutBtn" class="btn-logout" onclick="logout()" style="display: none;">Logout</button>
             </div>
         </div>
     </header>
    
     <main>
+        <!-- Core Committee Section -->
+        <section id="committee" class="section">
+            <div class="section-title">
+                <h2>Core Committee</h2>
+                <p>Meet our dedicated student leaders who work tirelessly for the batch.</p>
+            </div>
+            <div class="committee-container">
+                <!-- Committee members will be dynamically inserted here -->
+            </div>
+        </section>
+
         <!-- Home Section -->
         <section id="home" class="section active">
             <div class="hero">
                 <h2>Welcome to Al Hikma Friends Batch Union</h2>
                 <p>Your journey to knowledge and spiritual growth begins here. We provide a comprehensive Islamic education with modern academic excellence.</p>
-                <a href="reports" class="btn btn-primary" onclick="showSection('reports')">Explore Programs</a>
+                <a href="#reports" class="btn btn-primary" onclick="showSection('reports')">Explore Programs</a>
             </div>
            
             <div class="section-title">
@@ -1875,8 +2545,15 @@
                 <h2>Gallery</h2>
                 <p>Capturing moments from our journey</p>
             </div>
-           
-            <div class="gallery-grid">
+
+            <div class="gallery-tabs" style="display: flex; justify-content: center; margin-bottom: 30px;">
+                <button class="gallery-tab active" style="margin: 0 10px; padding: 12px 25px; background-color: var(--primary-color); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; transition: var(--transition);" onclick="showGalleryContent('general')">General Gallery</button>
+                <button class="gallery-tab" style="margin: 0 10px; padding: 12px 25px; background-color: var(--primary-color); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; transition: var(--transition);" onclick="showGalleryContent('achievements')">Our Achievements</button>
+            </div>
+
+            <!-- General Gallery -->
+            <div id="general-gallery" class="gallery-content active">
+                <div class="gallery-grid">
                 <div class="gallery-item">
                     <img src="https://i.ibb.co/5g2X3m2K/IMG-20250516-WA0009.jpg" alt="Batch Activity">
                     <div class="gallery-overlay">
@@ -1902,31 +2579,31 @@
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://i.ibb.co/BVcBS26t/IMG-20220905-224321-829.jpgB" alt="Campus">
+                    <img src="https://i.ibb.co/BVcBS26t/IMG-20220905-224321-829.jpg" alt="Campus">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://i.ibb.co/Z1WDNds0/Poster-2.jpg" alt="Campus">
+                    <img src="https://i.ibb.co/Z1WDNds0/Poster-2.jpg" alt="Event Poster">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://i.ibb.co/KjbQcxg2/IMG-20220905-224530-228-1.jpg" alt="Campus">
+                    <img src="https://i.ibb.co/KjbQcxg2/IMG-20220905-224530-228-1.jpg" alt="Group Activity">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://i.ibb.co/ycwxnHhw/IMG-20230126-163133-371-5.jpg" alt="Campus">
+                    <img src="https://i.ibb.co/ycwxnHhw/IMG-20230126-163133-371-5.jpg" alt="Campus Life">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://i.ibb.co/23zz1RXm/20221219-144745-1.jpg" alt="Campus">
+                    <img src="https://i.ibb.co/23zz1RXm/20221219-144745-1.jpg" alt="Student Activities">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
@@ -1937,9 +2614,152 @@
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </div>
+                <!-- New photos added -->
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/qMk2Pbjs/poster-final.jpg" alt="Science Expo">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/Tx85qNGT/culture-night-final-1.png" alt="Quran Competition">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/HpMfm132/news-paper-to-upload-page-0001.jpg" alt="Sports Day">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/tMM5njKX/Screenshot-2025-10-27-144345.png" alt="Library">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/XZgV4rkd/Screenshot-2025-10-27-144511.png" alt="Graduation Day">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/GQSZyrZZ/my-third-life.png" alt="Cultural Fest">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/DPm8ZWtY/Black-Modern-Minimal-Annual-Company-Awards-Made-with-Poster-My-Wall.png"" alt="Debate Competition">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/JRn8jyJY/news-pap-page-0001.jpg" alt="Annual Day">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <!-- Achievements Gallery -->
+            <div id="achievements-gallery" class="gallery-content">
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/0yPSYnmr/topper-of-fanstat.jpg" alt="Academic Achievement - Top Performer">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/qMk2Pbjs/poster-final.jpg" alt="Science Exhibition Winner">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/HpMfm132/news-paper-to-upload-page-0001.jpg" alt="Competition Winner Feature">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/DPm8ZWtY/Black-Modern-Minimal-Annual-Company-Awards-Made-with-Poster-My-Wall.png" alt="Awards Ceremony">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <!-- Additional 10 Achievement Images -->
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/6J1jhfZx/hasan.jpg" alt="Cultural Competition Winner">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/dwr1cZfc/sufiyana.jpg" alt="Outstanding Student Award">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/WvNFBWVL/achhe-miyan-poster.jpg" alt="Academic Excellence Award">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/KzhjJgtC/BOOK-REVIEW-2nd.jpg" alt="Research Achievement">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/vvTNB54y/shamshad-2.jpg" alt="Media Recognition">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/DfcNThMX/sufiyan.jpg" alt="Leadership Award">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/9mknHFG9/firoz.jpg alt="Community Service Achievement">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/DHhDt0Wk/Competition-Results-Made-with-Poster-My-Wall.jpg" alt="Special Recognition">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/23zz1RXm/20221219-144745-1.jpg" alt="Innovation Award">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/Z1WDNds0/Poster-2.jpg" alt="Best Performance Award">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
             </div>
         </section>
-       
+
         <!-- Reports Section -->
         <section id="reports" class="section">
             <div class="section-title">
@@ -2199,10 +3019,38 @@
                 <h3>Al Hikma Friends</h3>
                 <p>Providing excellence in Islamic education since 2000</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#" onclick="showQRModal('facebook')"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" onclick="showQRModal('twitter')"><i class="fab fa-twitter"></i></a>
+                    <a href="#" onclick="showQRModal('instagram')"><i class="fab fa-instagram"></i></a>
+                    <a href="#" onclick="showQRModal('youtube')"><i class="fab fa-youtube"></i></a>
+                </div>
+
+                <!-- QR Code Modal -->
+                <div id="qrModal" class="modal">
+                    <div class="modal-content" style="max-width: 400px; text-align: center;">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Scan QR Code</h3>
+                            <span class="close-modal" onclick="closeQRModal()">&times;</span>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div id="qrContainer" style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                                <div id="qrLoader" class="spinner" style="display: none;"></div>
+                                <img id="qrCodeImage" src="" alt="QR Code" style="width: 200px; height: 200px; opacity: 0; transition: opacity 0.3s ease;">
+                            </div>
+                            <p id="qrInstructions" style="color: var(--text-secondary);">Scan this QR code to follow us</p>
+                            <div id="qrActions" style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
+                                <button onclick="openSocialLink()" class="btn btn-primary" style="display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-external-link-alt"></i> Open Link
+                                </button>
+                                <button onclick="downloadQR()" class="btn btn-outline" style="display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-download"></i> Save QR
+                                </button>
+                            </div>
+                            <p id="qrHint" style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                                <i class="fas fa-info-circle"></i> Tip: You can also save the QR code for later
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
            
@@ -2280,6 +3128,12 @@
                 <div class="form-group">
                     <label for="studentPassword">Password</label>
                     <input type="password" id="studentPassword" placeholder="Enter your password">
+                </div>
+                <div style="text-align: center; margin: 20px 0; padding: 20px; border-top: 1px solid #eee;">
+                    <h4 style="color: var(--primary-color); margin-bottom: 15px;">Sponsor Access</h4>
+                    <img src="sponser.jpg" alt="Sponsorship QR Code" style="width: 150px; height: 150px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); background: white; padding: 10px; margin: 0 auto 15px;">
+                    <p style="color: #666; margin-bottom: 10px;">Scan QR code or click below</p>
+                    <button type="button" class="btn-confirm" onclick="openSponsorshipForm()" style="width: auto; padding: 8px 20px;">Apply as Sponsor</button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn-cancel" onclick="closeStudentLoginModal()">Cancel</button>
@@ -2504,8 +3358,8 @@
             { name: "Md Zaid", username: "zaid", password: "1237", photo: "", mobile: "8825345909", dateOfBirth: "1.02.2009", admissionNo: "1237", studying: "Darul Huda Islamic University", address: "Saraja , Ramgarh, Palamu(JH)-882210", skills: ["Sports", "Cricket", "Team Leadership"] },
             { name: "Abbu Shahma", username: "shahma", password: "1278", photo: "", mobile: "9570185919", dateOfBirth: "8.01.2009", admissionNo: "1278", studying: "Darul Huda Islamic University", address: "Budhibir, Harinath,Palamau,(JH)-822110", skills: ["Science", "Research", "Presentation"] },
             { name: "Gulam Dastagir", username: "dastagir", password: "1268", photo: "https://i.ibb.co/m5P403qZ/cropped-circle-image-3.png", mobile: "8102853602", dateOfBirth: "19.05.2009", admissionNo: "1268", rank: "9", studying: "Darul Huda Islamic University", address: "Majholi,Patan,Palamau,(JH)-822123", skills: ["Leadership", "Organization", "Public Speaking"] },
-            { name: "Tosif Ansari", username: "tosif", password: "1274", photo: "", mobile: "8084385866", dateOfBirth: "1.01.2006", admissionNo: "1274", studying: "Darul Huda Islamic University", address: "Hotwar, Pipratand,Palamau(JH)-822122", skills: ["Sports", "Football", "Teamwork"] },
-            { name: "Mohd Faisal", username: "faisal", password: "1254", photo: "", mobile: "9098447965", dateOfBirth: "5.5.2006", admissionNo: "1254", rank: "14", studying: "Darul Huda Islamic University", address: "Near Sunni Noori Jama Masjid , Satna (M.P)-485001", skills: ["Writing", "Journalism", "Content Creation"] },
+            { name: "Tosif Ansari", username: "tosif", password: "1274", photo: "https://i.ibb.co/1BVFhVY/cropped-circle-image-19.png", mobile: "8084385866", dateOfBirth: "1.01.2006", admissionNo: "1274", studying: "Darul Huda Islamic University", address: "Hotwar, Pipratand,Palamau(JH)-822122", skills: ["Sports", "Football", "Teamwork"] },
+            { name: "Mohd Faisal", username: "faisal", password: "1254", photo: "https://i.ibb.co/k66BxwW8/cropped-circle-image-16.png", mobile: "9098447965", dateOfBirth: "5.5.2006", admissionNo: "1254", rank: "14", studying: "Darul Huda Islamic University", address: "Near Sunni Noori Jama Masjid , Satna (M.P)-485001", skills: ["Writing", "Journalism", "Content Creation"] },
             { name: "Md Firoz Alam", username: "firoz", password: "1249", photo: "https://i.ibb.co/4RLXbrZF/cropped-circle-image-4.png", mobile: "7710839055", dateOfBirth: "28.02.2007", admissionNo: "1249", studying: "Darul Huda Islamic University", address: "Singhia Dulali, Bangla , Kishanganj(Bihar)-855101", skills: ["Mathematics", "Problem Solving", "Analytical Thinking"] },
             { name: "Asjad Raza", username: "asjad", password: "1283", photo: "", mobile: "6206112926", dateOfBirth: "31.03.2008", admissionNo: "1283", studying: "Darul Huda Islamic University", address: "Bachharpur,Sitamarhi,(Bihar)-843320", skills: ["Public Speaking", "Debate", "Leadership"] },
            
@@ -2515,7 +3369,7 @@
             { name: "Hanzala Maqsoom", username: "hanzala", password: "1161", photo: "https://i.ibb.co/Vc7HPgvz/cropped-circle-image-12.png", mobile: "6238700212", dateOfBirth: "20.9.2006", admissionNo: "1161", studying: "Darul Huda Islamic University", address: "Kaharwadi , Boharwadi , Udaipur(R.J)-313001", skills: ["Music", "Singing", "Performance"] },
             { name: "Hasan Raza", username: "hasan", password: "1169", photo: "", mobile: "8619983305", dateOfBirth: "19.9.2005", admissionNo: "1169", studying: "Darul Huda Islamic University", address: "Kaharwadi , Boharwadi , Udaipur(R.J)-313001", skills: ["Technology", "Programming", "Innovation"] },
             { name: "Thajudheen", username: "thajudheen", password: "1207", photo: "", mobile: "7022354081", dateOfBirth: "18.6.2006", admissionNo: "1207", studying: "Darul Huda Islamic University", address: "Kollahalli, Hassan (K.A)", skills: ["Quran Memorization", "Arabic Language", "Teaching"] },
-            { name: "Rehan Ahmed", username: "rehan", password: "1674", photo: "", mobile: "8736811786", dateOfBirth: "19.10.2008", admissionNo: "1674", studying: "Darul Huda Islamic University", address: "Tenu, Badhni Chafa,Siddharth Nagar(U.P)", skills: ["Sports", "Athletics", "Team Leadership"] },
+            { name: "Rehan Ahmed", username: "rehan", password: "1674", photo: "https://i.ibb.co/LDL4FwD2/cropped-circle-image-17.png", mobile: "8736811786", dateOfBirth: "19.10.2008", admissionNo: "1674", studying: "Darul Huda Islamic University", address: "Tenu, Badhni Chafa,Siddharth Nagar(U.P)", skills: ["Sports", "Athletics", "Team Leadership"] },
             { name: "Kaunain", username: "kaunain", password: "1675", photo: "", mobile: "8329540137", dateOfBirth: "13.7.2008", admissionNo: "1675", studying: "Darul Huda Islamic University", address: "Diwan Shah,Bhiwandi , Thane (M.H)-421302", skills: ["Art", "Design", "Creativity"] },
             { name: "Afran Shaikh", username: "afran", password: "1676", photo: "https://i.ibb.co/CsnGPBVj/cropped-circle-image-2.png", mobile: "7406147786", dateOfBirth: "17.8.2009", admissionNo: "1676", studying: "Darul Huda Islamic University", address: "Kanakadasa,Vijayapura (K.A)", skills: ["Leadership", "Organization", "Event Management"] },
             { name: "Arsalan", username: "arsalan", password: "1677", photo: "", mobile: "8087387374", dateOfBirth: "6.03.2006", admissionNo: "1677", studying: "Darul Huda Islamic University", address: "Gaibi Nagar,Bhiwandi , Thane (M.H)-421302", skills: ["Science", "Research", "Experimentation"] },
@@ -2535,111 +3389,137 @@
                     id: 1,
                     name: "مجمع البحرين",
                     date: "2023-05-22",
-                    participation: 0,
+                    participation: 24,
                     remarks: "Good",
                     description: "Bahrain Assembly program",
                     chairman: "Sadaf ziya",
-                    winners: []
+                    winners: [
+                        { rank: 1, name: "Sadaf Ziya", wing: "" },
+                        { rank: 2, name: "Muhammad Sibgathullah", wing: "" },
+                        { rank: 3, name: "Md Zeeshan", wing: "" }
+                    ]
                 },
                 {
                     id: 2,
                     name: "Tying",
                     date: "2023-05-14",
-                    participation: 0,
+                    participation: 11,
                     remarks: "Good",
                     description: "Tying program",
                     chairman: "Zaid Raza",
-                    winners: []
+                    winners: [{ rank: 1, name: "Muhammed sibgathullah", wing: "" },
+                        { rank: 2, name: "MD Zeeshan Shaikh", wing: "" },
+                        { rank: 3, name: "md Zaid Raza", wing: "" }]
                 },
                 {
                     id: 3,
                     name: "Fiqha Clas",
                     date: "2023-05-16",
-                    participation: 0,
+                    participation: 12,
                     remarks: "Good",
                     description: "Fiqh Class program",
                     chairman: "Shamshad",
-                    winners: []
+                    winners: [
+                       { rank: 1, name: "sabir", wing: "" },
+                        { rank: 2, name: "Hanzala", wing: "" },
+                        { rank: 3, name: "shamshad", wing: "" },
+                    ]
                 },
                 {
                     id: 4,
                     name: "G.K Quiz",
                     date: "2023-05-19",
-                    participation: 0,
+                    participation: 9,
                     remarks: "Good",
                     description: "General Knowledge Quiz program",
                     chairman: "Hanzala",
-                    winners: []
+                    winners: [{ rank: 1, name: "Tosif", wing: "" },
+                        { rank: 2, name: "Abbu Shahma", wing: "" },
+                        { rank: 3, name: "MD mosaheb Ali", wing: "" }]
                 },
                 {
                     id: 5,
                     name: "Fiqah Mcq",
                     date: "2023-05-30",
-                    participation: 0,
-                    remarks: "Good",
+                    participation: 15,
+                    remarks: "Excellence",
                     description: "Fiqh MCQ program",
                     chairman: "Shamshad",
-                    winners: []
+                    winners: [{ rank: 1, name: "shamshad", wing: "" },
+                        { rank: 2, name: "Md Achhe Miyan", wing: "" },
+                        { rank: 3, name: "tosif Ansari", wing: "" }]
                 },
                 {
                     id: 6,
                     name: "Urdu Debate",
                     date: "2023-05-20",
-                    participation: 0,
+                    participation: 12,
                     remarks: "Good",
                     description: "Urdu Debate program",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "Firoz Alam", wing: "" },
+                        { rank: 2, name: "Hanzala Maqsoom", wing: "" },
+                        { rank: 3, name: "Asjad Raza", wing: "" }]
                 },
                 {
                     id: 7,
                     name: "Thanfus",
                     date: "2023-05-22",
-                    participation: 0,
+                    participation: 16,
                     remarks: "Good",
                     description: "Thanfus program",
                     chairman: "Sibgathullah",
-                    winners: []
+                    winners: [{ rank: 1, name: "Hasan Raza", wing: "" },
+                        { rank: 2, name: "Thajudheen", wing: "" },
+                        { rank: 3, name: "Rehan Ahmed", wing: "" }]
                 },
                 {
                     id: 8,
                     name: "Magzine",
                     date: "2023-05-17",
-                    participation: 0,
+                    participation: 25,
                     remarks: "Good",
                     description: "Magazine program",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "UL  Hussain and Team", wing: "" },
+                        { rank: 2, name: "Arsalan and team", wing: "" },
+                        { rank: 3, name: "shamshad and team", wing: "" }]
                 },
                 {
                     id: 9,
                     name: "News Paper",
                     date: "2023-05-24",
-                    participation: 0,
+                    participation: 25,
                     remarks: "Good",
                     description: "Newspaper program",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "kaunain and team", wing: "" },
+                        { rank: 2, name: "tosif and team ", wing: "" },
+                        { rank: 3, name: "Abbu shahma and team", wing: "" }]
                 },
                 {
                     id: 10,
                     name: "22 Majma ul Bahrain",
                     date: "2023-05-22",
-                    participation: 0,
+                    participation: 8,
                     remarks: "Good",
                     description: "22 Majma ul Bahrain program",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "sadaf ziya", wing: "" },
+                        { rank: 2, name: "Muhammed sibgathullah", wing: "" },
+                        { rank: 3, name: "Mohd sahil ", wing: "" }]
                 },
                 {
                     id: 11,
                     name: "Scince master",
                     date: "2023-05-26",
-                    participation: 0,
+                    participation: 18,
                     remarks: "Good",
                     description: "Science Master program",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "sufiyan Ahmed Raza", wing: "" },
+                        { rank: 2, name: "md zaid Raza", wing: "" },
+                        { rank: 3, name: "Mosheb Ali", wing: "" }]
                 }
             ],
             general_knowledge: [
@@ -2647,59 +3527,70 @@
                     id: 12,
                     name: "G.K Quiz",
                     date: "2023-05-19",
-                    participation: 0,
+                    participation: 7,
                     remarks: "Good",
                     description: "General Knowledge Quiz program",
                     chairman: "Hanzala",
-                    winners: []
+                    winners: [{ rank: 1, name: "sufiyan Ahmed Raza", wing: "" },
+                        { rank: 2, name: "md zaid Raza", wing: "" },
+                        { rank: 3, name: "Mosheb Ali", wing: "" }]
                 }
+                
             ],
             tafsir: [
                 {
                     id: 13,
                     name: "Quran quiz (quizzes)",
                     date: "2023-06-01",
-                    participation: 0,
+                    participation: 15,
                     remarks: "Good",
                     description: "Quran Quiz program",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "achhe Miyan", wing: "" },
+                        { rank: 2, name: "tosif Ansari", wing: "" },
+                        { rank: 3, name: "hanzala Maqsoom", wing: "" }]
                 },
                 {
                     id: 14,
                     name: "سبع لقرأة",
                     date: "2023-06-02",
-                    participation: 0,
+                    participation: 7,
                     remarks: "Good",
                     description: "Seven for Recitation program",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "ab shahma", wing: "" },
+                        { rank: 2, name: "md zaid Raza", wing: "" },
+                        { rank: 3, name: "Ache Miyan", wing: "" }]
                 },
                 {
                     id: 15,
                     name: "ألم يتدبروا القران with science",
                     date: "2023-06-03",
-                    participation: 0,
+                    participation: 9,
                     remarks: "Good",
                     description: "Have they not pondered the Quran with science program",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "Mohd faisal", wing: "" },
+                        { rank: 2, name: "Asjad Raza", wing: "" },
+                        { rank: 3, name: "hasan Raza", wing: "" }]
                 },
                 {
                     id: 16,
                     name: "Dr. Zakir naik",
                     date: "2023-06-04",
-                    participation: 0,
+                    participation: 11,
                     remarks: "Good",
                     description: "Dr. Zakir Naik videos program (7 days)",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "thajudheen", wing: "" },
+                        { rank: 2, name: "Rehan Ahmed", wing: "" },
+                        { rank: 3, name: "kaunain", wing: "" }]
                 },
                 {
                     id: 17,
                     name: "Book quiz",
                     date: "2023-06-05",
-                    participation: 0,
+                    participation: 16,
                     remarks: "Good",
                     description: "Book Quiz program",
                     chairman: "",
@@ -2709,67 +3600,75 @@
                     id: 18,
                     name: "Seminar on Muslims scholar related Tafsir",
                     date: "2023-06-06",
-                    participation: 0,
+                    participation: 15,
                     remarks: "Good",
                     description: "Seminar on Muslim Scholars related to Tafsir program",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "Mosaheb Ali", wing: "" },
+                        { rank: 2, name: "Tajuddin ", wing: "" },
+                        { rank: 3, name: "kaunain ansari ", wing: "" }]
                 },
                 {
                     id: 19,
                     name: "Research and ppt",
                     date: "2023-06-07",
-                    participation: 0,
+                    participation: 14,
                     remarks: "Good",
                     description: "Research and PPT program",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "Md zaid raza ", wing: "" },
+                        { rank: 2, name: "Mosheb Ali", wing: "" },
+                        { rank: 3, name: "Firoz Alam ", wing: "" }]
                 },
                 {
                     id: 20,
                     name: "Qur'anic Recitation with Meaning (تفسير الجلالين)",
                     date: "2023-06-08",
-                    participation: 0,
+                    participation: 13,
                     remarks: "Good",
                     description: "Qur'anic Recitation with Meaning program",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "Ache miyan ", wing: "" },
+                        { rank: 2, name: "tausif Anasari ", wing: "" },
+                        { rank: 3, name: "afran ", wing: "" }]
                 },
                 {
                     id: 21,
                     name: "Type of Universe",
                     date: "2023-06-09",
-                    participation: 0,
+                    participation: 18,
                     remarks: "Good",
                     description: "Type of Universe program",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "Muhamme sibgathullah", wing: "" },
+                        { rank: 2, name: "Asjad Raza", wing: "" },
+                        { rank: 3, name: "arsalan ", wing: "" }]
                 },
                 {
                     id: 22,
                     name: "Science expo",
                     date: "2023-06-10",
-                    participation: 0,
+                    participation: 24,
                     remarks: "Good",
                     description: "Science Expo program",
                     chairman: "",
-                    winners: []
+                    
                 },
                 {
                     id: 23,
                     name: "Qur'an Video Theatre",
                     date: "2023-06-11",
-                    participation: 0,
+                    participation: 24,
                     remarks: "Good",
                     description: "Qur'an Video Theatre program (3D videos for 7 days)",
                     chairman: "",
-                    winners: []
+                    
                 },
                 {
                     id: 24,
                     name: "Current Scientists & Scholars",
                     date: "2023-06-12",
-                    participation: 0,
+                    participation: 22,
                     remarks: "Good",
                     description: "Current Scientists & Scholars program (Class after maghrib)",
                     chairman: "",
@@ -2779,7 +3678,7 @@
                     id: 25,
                     name: "Inventions and Inventors (100)",
                     date: "2023-06-13",
-                    participation: 0,
+                    participation: 16,
                     remarks: "Good",
                     description: "Inventions and Inventors program (100)",
                     chairman: "",
@@ -2789,41 +3688,43 @@
                     id: 26,
                     name: "Informative videos on science",
                     date: "2023-06-14",
-                    participation: 0,
+                    participation: 18,
                     remarks: "Good",
                     description: "Informative videos on science program (7 days)",
                     chairman: "",
-                    winners: []
+                    
                 },
                 {
                     id: 27,
                     name: "Infectious Diseases: Types, Causes & Treatments",
                     date: "2023-06-15",
-                    participation: 0,
+                    participation: 16,
                     remarks: "Good",
                     description: "Infectious Diseases program",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "Mohd faisal", wing: "" },
+                        { rank: 2, name: "Asjad Raza", wing: "" },
+                        { rank: 3, name: "hasan Raza", wing: "" }]
                 },
                 {
                     id: 28,
                     name: "Benefits move on science",
                     date: "2023-06-16",
-                    participation: 0,
+                    participation: 24,
                     remarks: "Good",
                     description: "Benefits move on science program",
                     chairman: "",
-                    winners: []
+                    
                 },
                 {
                     id: 29,
                     name: "Regional Science Centre and Planetarium",
                     date: "2023-06-17",
-                    participation: 0,
+                    participation: 24,
                     remarks: "Good",
                     description: "Regional Science Centre and Planetarium program",
                     chairman: "",
-                    winners: []
+                    
                 },
                 {
                     id: 30,
@@ -2833,17 +3734,21 @@
                     remarks: "Good",
                     description: "Best Students Award program",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "sadaf ziya", wing: "" },
+                        { rank: 2, name: "Rehan Ahmed", wing: "" },
+                        { rank: 3, name: "Shamshad", wing: "" }]
                 },
                 {
                     id: 31,
-                    name: "Award distribution ceremony",
+                    name: "Award distribution ceremony poster making",
                     date: "2023-06-19",
-                    participation: 0,
+                    participation: 7,
                     remarks: "Good",
                     description: "Award Distribution Ceremony program",
                     chairman: "",
-                    winners: []
+                    winners: [{ rank: 1, name: "zeeshan Shaikh", wing: "" },
+                        { rank: 2, name: "Muhammed sibgathullah", wing: "" },
+                        { rank: 3, name: "md zaid Raza", wing: "" }]
                 }
             ],
             viva: [
@@ -3208,11 +4113,12 @@
             let programs = [];
             if (filter === 'all') {
                 // Get all programs from all wings
-                Object.values(wingPrograms).forEach(wingPrograms => {
-                    programs = programs.concat(wingPrograms);
+                Object.entries(wingPrograms).forEach(([wing, progs]) => {
+                    // Add wing information to each program
+                    programs = programs.concat(progs.map(p => ({...p, wing})));
                 });
             } else {
-                programs = wingPrograms[filter] || [];
+                programs = (wingPrograms[filter] || []).map(p => ({...p, wing: filter}));
             }
            
             if (programs.length === 0) {
@@ -3256,15 +4162,18 @@
                     <div class="program-winners">
                         <h4><i class="fas fa-trophy"></i> Winners</h4>
                         <div class="winner-grid">
-                            ${program.winners.map(winner => `
-                                <div class="winner-card">
-                                    <div class="winner-medal ${getRankClass(winner.rank)}">
-                                        ${getMedalIcon(winner.rank)}
+                            ${program.winners && program.winners.length > 0 ? 
+                                program.winners.map(winner => `
+                                    <div class="winner-card">
+                                        <div class="winner-medal ${getRankClass(winner.rank)}">
+                                            ${getMedalIcon(winner.rank)}
+                                        </div>
+                                        <div class="winner-card-name">${winner.name}</div>
+                                        <div class="winner-card-wing">${winner.wing || getWingDisplayName(filter)}</div>
                                     </div>
-                                    <div class="winner-card-name">${winner.name}</div>
-                                    <div class="winner-card-wing">${winner.wing}</div>
-                                </div>
-                            `).join('')}
+                                `).join('') : 
+                                `<p style="text-align: center; padding: 15px; color: var(--text-secondary);">Results pending...</p>`
+                            }
                         </div>
                     </div>
                 `;
