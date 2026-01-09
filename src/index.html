@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al Hikma Friends Batch Union - Darul Huda Islamic University</title>
+    <meta name="description" content="Official website of Al Hikma Friends Batch Union.">
+    
+    <!-- External Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #004d40;
+            --secondary-color: #00796b;
+            --accent-color: #ffd54f;
+            --danger-color: #e74c3c;
+            --success-color: #4caf50;
+            --warning-color: #ffc107;
+            --light-bg: #f9fafb;
+            --card-bg: #ffffff;
+            --section-bg: #f1fdfa;
+            --text-primary: #2c3e50;
+            --text-secondary: #666;
+            --shadow: 0 5px 15px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--light-bg); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+       
+        /* --- Header --- */
+        header { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 1rem 0; box-shadow: 0 3px 10px rgba(0,0,0,0.2); position: sticky; top: 0; z-index: 1000; }
+        .header-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 15px; text-decoration: none; color: white; }
+        .logo img { height: 60px; border-radius: 50%; border: 2px solid #fff; transition: var(--transition); }
+        .logo img:hover { transform: rotate(10deg) scale(1.05); }
+        .logo h1 { font-size: 1.5rem; font-weight: 700; }
+        .logo span { color: var(--accent-color); }
+        nav { display: flex; gap: 15px; }
+        nav a { color: white; text-decoration: none; padding: 8px 12px; border-radius: 5px; transition: var(--transition); font-size: 0.95rem; white-space: nowrap; }
+        nav a:hover, nav a.active { background-color: rgba(255, 255, 255, 0.2); color: var(--accent-color); }
+        .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .user-actions { display: flex; gap: 10px; align-items: center; }
+        
+        /* --- Buttons --- */
+        .btn { padding: 8px 20px; border-radius: 50px; font-weight: 600; text-decoration: none; cursor: pointer; transition: var(--transition); display: inline-block; border: none; font-size: 0.9rem; text-align: center; }
+        .btn-primary { background-color: var(--accent-color); color: var(--primary-color); }
+        .btn-primary:hover { background-color: #ffb300; transform: translateY(-2px); }
+        .btn-outline { border: 2px solid white; color: white; background: transparent; }
+        .btn-outline:hover { background-color: white; color: var(--primary-color); }
+        .btn-success { background-color: var(--success-color); color: white; }
+        .btn-success:hover { background-color: #45a049; transform: translateY(-2px); }
+        .btn-danger { background-color: var(--danger-color); color: white; }
+        .btn-danger:hover { background-color: #c0392b; }
+        .btn-sm { padding: 5px 10px; font-size: 0.8rem; border-radius: 4px; }
+        .delete-btn { background: none; border: none; color: #e74c3c; cursor: pointer; transition: var(--transition); }
+        .delete-btn:hover { color: #c0392b; transform: scale(1.1); }
+       
+        /* --- Main Layout --- */
+        main { max-width: 1200px; margin: 30px auto; padding: 0 20px; min-height: 60vh; }
+        .section { display: none; background-color: var(--card-bg); border-radius: 10px; box-shadow: var(--shadow); padding: 30px; margin-bottom: 30px; animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .section.active { display: block; }
+        .section-title { text-align: center; margin-bottom: 30px; }
+        .section-title h2 { color: var(--primary-color); font-size: 2rem; margin-bottom: 10px; position: relative; display: inline-block; }
+        .section-title h2::after { content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: var(--accent-color); border-radius: 3px; }
+        .section-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+       
+        /* --- Committee (Original Style) --- */
+        .committee-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 20px; }
+        .committee-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+        .committee-card:hover { transform: translateY(-10px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+        .committee-image-container { height: 250px; overflow: hidden; position: relative; }
+        .committee-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .committee-card:hover .committee-image { transform: scale(1.1); }
+        .committee-info { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 20px; color: white; transform: translateY(0); transition: transform 0.3s ease; }
+        .committee-content { padding: 20px; }
+        .committee-contact { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+        .contact-button { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 10px 20px; border-radius: 25px; font-size: 1rem; transition: all 0.3s ease; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: none; }
+        .contact-button:hover { background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+        /* --- Cards & Features --- */
+        .hero { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("https://i.ibb.co/BVcBS26t/IMG-20220905-224321-829.jpg") center/cover; color: white; padding: 80px 20px; text-align: center; border-radius: 10px; margin-bottom: 40px; }
+        .hero h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .feature-card { background-color: var(--section-bg); border-radius: 10px; padding: 25px; box-shadow: var(--shadow); transition: var(--transition); text-align: center; }
+        .feature-card:hover { transform: translateY(-5px); }
+        .feature-icon { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px; }
+
+        /* --- Gallery --- */
+        .gallery-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; }
+        .gallery-tab { padding: 10px 20px; background-color: #ddd; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; color: #555; }
+        .gallery-tab.active { background-color: var(--primary-color); color: white; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
+        .gallery-item { position: relative; border-radius: 8px; overflow: hidden; height: 220px; cursor: pointer; box-shadow: var(--shadow); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay i { color: white; font-size: 2rem; }
+        .gallery-delete { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.7); border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; z-index: 10; }
+        .gallery-delete button { background: none; border: none; color: white; font-size: 1rem; cursor: pointer; }
+
+        /* --- Reports & Tables --- */
+        .wing-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; justify-content: center; }
+        .wing-btn { background-color: var(--primary-color); color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; }
+        .wing-btn.active, .wing-btn:hover { background-color: var(--secondary-color); }
+        .table-responsive { overflow-x: auto; margin-bottom: 20px; }
+        .report-table { width: 100%; border-collapse: collapse; box-shadow: var(--shadow); background: white; border-radius: 8px; overflow: hidden; }
+        .report-table th, .report-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #eee; }
+        .report-table th { background-color: var(--primary-color); color: white; }
+        .report-table tr:hover { background-color: #f9f9f9; }
+        .action-col { width: 50px; text-align: center; }
+
+        /* --- Results Cards --- */
+        .program-result-card { background-color: var(--section-bg); border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: var(--shadow); border-left: 5px solid var(--primary-color); position: relative; }
+        .result-delete { position: absolute; top: 15px; right: 15px; background: none; border: none; color: #888; cursor: pointer; font-size: 1.2rem; transition: 0.3s; }
+        .result-delete:hover { color: var(--danger-color); transform: scale(1.1); }
+        .winner-grid { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px; }
+        .winner-card { flex: 1 1 100px; background: white; padding: 10px; border-radius: 5px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .winner-medal { font-size: 1.5rem; margin-bottom: 5px; }
+
+        /* --- Members --- */
+        .members-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        .member-card { background-color: white; border-radius: 10px; padding: 20px; text-align: center; box-shadow: var(--shadow); transition: var(--transition); }
+        .member-card:hover { transform: translateY(-5px); }
+        .member-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; border: 3px solid var(--section-bg); }
+        .member-name { font-weight: 600; color: var(--primary-color); margin-bottom: 5px; }
+        .member-details { font-size: 0.85rem; color: #777; margin-bottom: 15px; }
+
+        /* --- Profile --- */
+        .profile-container { display: grid; grid-template-columns: 1fr 2fr; gap: 30px; }
+        .profile-sidebar { text-align: center; background: var(--section-bg); padding: 30px; border-radius: 10px; }
+        .profile-avatar { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary-color); margin-bottom: 20px; }
+        .profile-info { background: white; padding: 20px; border-radius: 10px; }
+        .info-item { margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .info-label { font-weight: 600; color: var(--primary-color); display: flex; align-items: center; gap: 8px; margin-bottom: 5px;}
+        .skill-tag { display: inline-block; background: var(--primary-color); color: white; padding: 5px 12px; border-radius: 15px; margin: 0 5px 5px 0; font-size: 0.85rem; }
+
+        /* --- Footer --- */
+        footer { background-color: var(--primary-color); color: white; padding: 40px 0 20px; margin-top: 50px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .footer-column h3 { color: var(--accent-color); margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; display: inline-block;}
+        .footer-links li { list-style: none; margin-bottom: 10px; }
+        .footer-links a { color: #ddd; text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--accent-color); padding-left: 5px; }
+        .social-links a { display: inline-flex; width: 35px; height: 35px; background: rgba(255,255,255,0.1); align-items: center; justify-content: center; border-radius: 50%; margin-right: 10px; color: white; text-decoration: none; transition: 0.3s; }
+        .social-links a:hover { background: var(--accent-color); color: var(--primary-color); }
+
+        /* --- Modals --- */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center; }
+        .modal.show { display: flex; }
+        .modal-content { background-color: white; border-radius: 10px; width: 90%; max-width: 500px; padding: 25px; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.2); animation: slideDown 0.3s ease; }
+        #sponsorshipModal .modal-content { max-width: 700px; } /* Sponsor modal is wider */
+
+        @keyframes slideDown { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .close-modal { cursor: pointer; font-size: 1.5rem; color: #888; transition: 0.3s; }
+        .close-modal:hover { color: var(--danger-color); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem; color: #333; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.95rem; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(0, 77, 64, 0.1); }
+        .modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+
+        /* --- Toast Notification --- */
+        .toast { position: fixed; bottom: 20px; right: 20px; background-color: #333; color: white; padding: 12px 25px; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 3000; display: flex; align-items: center; gap: 10px; transform: translateX(400px); transition: transform 0.3s ease; }
+        .toast.show { transform: translateX(0); }
+        .toast.success { background-color: var(--success-color); }
+        .toast.error { background-color: var(--danger-color); }
+        .toast.warning { background-color: var(--warning-color); color: #333; }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; gap: 15px; }
+            nav { display: none; width: 100%; flex-direction: column; align-items: center; margin-top: 10px; }
+            nav.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .user-actions { width: 100%; justify-content: center; flex-wrap: wrap; }
+            .profile-container { grid-template-columns: 1fr; }
+            .hero h2 { font-size: 1.8rem; }
+            .modal-content { width: 95%; padding: 15px; }
+            .contact-button { padding: 8px 12px; font-size: 0.9rem; }
+            .section-header-row { flex-direction: column; gap: 10px; text-align: center; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo" onclick="showSection('home')">
+                <img src="https://i.ibb.co/gZBFFzf4/cropped-circle-image-2.png" alt="Al Hikma Logo">
+                <h1>Al Hikma <span>Friends</span></h1>
+            </a>
+            
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <a href="#" class="active" onclick="showSection('home')">Home</a>
+                <a href="#" onclick="showSection('committee')">Committee</a>
+                <a href="#" onclick="showSection('gallery')">Gallery</a>
+                <a href="#" onclick="showSection('reports')">Reports</a>
+                <a href="#" onclick="showSection('results')">Results</a>
+                <a href="#" onclick="showSection('teachers')">Teachers</a>
+                <a href="#" onclick="showSection('members')">Members</a>
+                <a href="#" onclick="showSection('contact')">Contact</a>
+            </nav>
+
+            <div class="user-actions">
+                <a href="#" class="btn btn-outline" onclick="openLoginOptionsModal()">Login</a>
+                <a href="#" class="btn" style="background-color: var(--accent-color); color: var(--primary-color);" onclick="openSponsorshipForm()">Sponsor</a>
+                <button id="logoutBtn" class="btn btn-danger" onclick="logout()" style="display: none;">Logout</button>
+            </div>
+        </div>
+    </header>
+   
+    <main>
+        <!-- Committee Section -->
+        <section id="committee" class="section">
+            <div class="section-title">
+                <h2>Core Committee</h2>
+                <p>Meet our dedicated student leaders who work tirelessly for batch.</p>
+            </div>
+            <div class="committee-container" id="committeeContainer">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <h2>Welcome to Al Hikma Friends</h2>
+                <p>Your journey to knowledge and spiritual growth begins here.</p>
+                <br>
+                <a href="#" class="btn btn-primary" onclick="showSection('reports')">Explore Programs</a>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Academic Excellence</h3>
+                    <p>Rigorous curriculum and dedicated teaching.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-hands-helping"></i></div>
+                    <h3>Community Service</h3>
+                    <p>Engaging in projects to benefit society.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-mosque"></i></div>
+                    <h3>Islamic Values</h3>
+                    <p>Upholding ethics in all activities.</p>
+                </div>
+            </div>
+        </section>
+       
+        <!-- Gallery Section (INPUT/OUTPUT) -->
+        <section id="gallery" class="section">
+            <div class="section-title">
+                <h2>Gallery</h2>
+                <p>Capturing moments from our journey</p>
+            </div>
+            
+            <!-- Gallery Controls (Admin Only) -->
+            <div class="section-header-row">
+                <div class="gallery-tabs">
+                    <button class="gallery-tab active" onclick="showGalleryContent('general')">General Gallery</button>
+                    <button class="gallery-tab" onclick="showGalleryContent('achievements')">Our Achievements</button>
+                </div>
+                <button id="adminControls-gallery" class="btn btn-success" style="display:none;" onclick="openAddGalleryModal()">
+                    <i class="fas fa-camera"></i> Add Image
+                </button>
+            </div>
+
+            <!-- General Gallery (Dynamic Output) -->
+            <div id="general-gallery" class="gallery-content active">
+                <div class="gallery-grid" id="general-gallery-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Achievements Gallery (Dynamic Output) -->
+            <div id="achievements-gallery" class="gallery-content" style="display:none;">
+                <div class="gallery-grid" id="achievements-gallery-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Reports Section (Wing Name + Delete Option) -->
+        <section id="reports" class="section">
+            <div class="section-title">
+                <h2>Reports</h2>
+                <p>The Student Batch Union organizes various programs across different wings</p>
+            </div>
+            
+            <!-- Reports Controls -->
+            <div class="section-header-row">
+                <div class="wing-buttons" id="wingButtons">
+                    <!-- Buttons populated by JS dynamically -->
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button id="adminControls-reports" class="btn btn-success" style="display:none;" onclick="openAddReportModal()"><i class="fas fa-plus"></i> Add Report</button>
+                    <button id="adminControls-addWing" class="btn btn-primary" style="display:none;" onclick="openAddWingModal()">Add Wing</button>
+                </div>
+            </div>
+            <div id="reportsOutput"></div>
+        </section>
+       
+        <!-- Results Section (Wing Name + Delete Option) -->
+        <section id="results" class="section">
+            <div class="section-title">
+                <h2>Results</h2>
+                <p>Achievements and awards of our students</p>
+            </div>
+
+            <!-- Results Controls -->
+            <div class="section-header-row">
+                <div class="wing-buttons" id="resultWingButtons">
+                    <!-- Buttons populated by JS dynamically -->
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button id="adminControls-results" class="btn btn-success" style="display:none;" onclick="openAddResultModal()"><i class="fas fa-plus"></i> Add Result</button>
+                    <!-- Add Wing button can be reused here logically -->
+                </div>
+            </div>
+            <div id="resultsOutput"></div>
+        </section>
+       
+        <!-- Members Section -->
+        <section id="members" class="section">
+            <div class="section-title">
+                <h2>Members <span style="background-color: var(--accent-color); color: var(--primary-color); padding: 5px 10px; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">24 Students</span></h2>
+                <p>Our dedicated team of student representatives</p>
+            </div>
+            <div class="members-grid" id="membersGrid"></div>
+        </section>
+       
+        <!-- Teachers Profile Section (Restored) -->
+        <section id="teachers" class="section">
+            <div class="section-title">
+                <h2>Teacher Profile</h2>
+                <p>Manage your Teacher details and  progress.</p>
+            </div>
+            <div class="profile-container" id="teacherProfileContainer">
+                <div class="profile-sidebar">
+                    <img id="teacherAvatar" class="profile-avatar" src="" alt="Profile">
+                    <h3 id="teacherName"></h3>
+                    <p id="teacherDepartment" style="color:#666; margin-bottom: 10px;"></p>
+                    <button class="btn btn-primary" onclick="openTeacherSkillsModal()">Edit Skills</button>
+                </div>
+                <div class="profile-info">
+                    <h3 style="margin-bottom: 20px;">Personal Information</h3>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-phone"></i> Mobile:7352126871</div>
+                        <div id="teacherMobile"></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-envelope"></i> Email:Musthafahudawi@105</div>
+                        <div id="teacherEmail"></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-chalkboard-teacher"></i> Subject:alfiya</div>
+                        <div id="teacherSubject"></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-star"></i> Skills:Arabic </div>
+                        <div id="teacherSkills"></div>
+                    </div>
+                    <div style="margin-top: 30px; padding: 20px; background: var(--section-bg); border-radius: 10px;">
+                        <h4 style="margin-bottom: 10px; color: var(--primary-color);">Class Teacher Profile</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Detailed record of students and attendance.</p>
+                        <button class="btn btn-success" style="margin-top: 15px;" onclick="showToast('Opening Class Teacher Module...', 'info')">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Section (Student) -->
+        <section id="profile" class="section">
+            <div class="section-title">
+                <h2>Member Profile</h2>
+            </div>
+            <div class="profile-container">
+                <div class="profile-sidebar">
+                    <img id="profileAvatar" class="profile-avatar" src="" alt="Profile">
+                    <h3 id="profileName"></h3>
+                    <p id="profileAdmission" style="color:#666; margin-bottom: 20px;"></p>
+                    <button class="btn btn-primary" onclick="openSkillsModal()">Edit Skills</button>
+                </div>
+                <div class="profile-info">
+                    <h3 style="margin-bottom: 20px;">Details</h3>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-phone"></i> Mobile</div>
+                        <div id="profileMobile"></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-birthday-cake"></i> DOB</div>
+                        <div id="profileDob"></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-map-marker-alt"></i> Address</div>
+                        <div id="profileAddress"></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-star"></i> Skills</div>
+                        <div id="profileSkills"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sponsorship Output Section -->
+        <section id="sponsorList" class="section">
+            <div class="section-title">
+                <h2>Sponsorship Applications</h2>
+                <p>View and manage received sponsorship requests.</p>
+            </div>
+            <div class="table-responsive">
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Organization</th>
+                            <th>Type</th>
+                            <th>Amount Range</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sponsorshipTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+            </div>
+            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <p><i class="fas fa-map-marker-alt"></i> Darul Huda Islamic University, Chemmad, Kerala</p>
+                <p><i class="fas fa-phone"></i> +91 7352126871</p>
+                <p><i class="fas fa-envelope"></i> alhikmafriends22@gmail.com</p>
+            </div>
+        </section>
+
+        <!-- Admin Dashboard -->
+        <section id="adminHome" class="section">
+            <div class="section-title">
+                <h2>Admin Dashboard</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Manage Reports</h3>
+                    <p>Add or edit program reports.</p>
+                    <button class="btn btn-success" onclick="showSection('reports')">Go to Reports</button>
+                </div>
+                <div class="feature-card">
+                    <h3>Manage Results</h3>
+                    <p>Update competition results.</p>
+                    <button class="btn btn-success" onclick="showSection('results')">Go to Results</button>
+                </div>
+                <div class="feature-card">
+                    <h3>Manage Gallery</h3>
+                    <p>Add or remove images.</p>
+                    <button class="btn btn-primary" onclick="showSection('gallery')">Go to Gallery</button>
+                </div>
+                 <div class="feature-card">
+                    <h3>Sponsorship Requests</h3>
+                    <p>View received applications.</p>
+                    <button class="btn btn-primary" onclick="showSection('sponsorList')">View Sponsors</button>
+                </div>
+            </div>
+        </section>
+    </main>
+   
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h3>Al Hikma Friends</h3>
+                <p>Providing excellence in Islamic education since 2000</p>
+                <div class="social-links">
+                    <a href="#" onclick="showQRModal('facebook')"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" onclick="showQRModal('twitter')"><i class="fab fa-twitter"></i></a>
+                    <a href="#" onclick="showQRModal('instagram')"><i class="fab fa-instagram"></i></a>
+                    <a href="#" onclick="showQRModal('youtube')"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="showSection('home')">Home</a></li>
+                    <li><a href="#" onclick="showSection('committee')">Committee</a></li>
+                    <li><a href="#" onclick="showSection('reports')">Reports</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> Darul Huda Islamic University, Malappuram, Kerala</li>
+                    <li><i class="fas fa-phone"></i> +91 7352126871</li>
+                    <li><i class="fas fa-envelope"></i> alhikmafriends22@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; color: #bbb;">
+            © 2023 Darul Huda Islamic University. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i class="fas fa-info-circle"></i> <span id="toastMessage">Notification</span>
+    </div>
+
+    <!-- ================= MODALS ================= -->
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Login</h3>
+                <span class="close-modal" onclick="closeModal('loginModal')">&times;</span>
+            </div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="loginUsername" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="closeModal('loginModal')">Cancel</button>
+                    <button type="submit" class="btn btn-success">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Gallery Image Modal -->
+    <div id="addGalleryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Image to Gallery</h3>
+                <span class="close-modal" onclick="closeModal('addGalleryModal')">&times;</span>
+            </div>
+            <form onsubmit="handleAddGalleryItem(event)">
+                <div class="form-group">
+                    <label>Image URL (e.g. from ibb.co)</label>
+                    <input type="text" id="addGalleryUrl" placeholder="https://i.ibb.co/..." required>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="addGalleryCategory">
+                        <option value="general">General Gallery</option>
+                        <option value="achievements">Our Achievements</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Description (Optional)</label>
+                    <textarea id="addGalleryDesc" rows="3"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="closeModal('addGalleryModal')">Cancel</button>
+                    <button type="submit" class="btn btn-success">Add Image</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Wing Modal -->
+    <div id="addWingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Wing</h3>
+                <span class="close-modal" onclick="closeModal('addWingModal')">&times;</span>
+            </div>
+            <form onsubmit="handleAddWing(event)">
+                <div class="form-group">
+                    <label>Wing Name (e.g. Sports)</label>
+                    <input type="text" id="newWingName" placeholder="Enter wing name" required>
+                </div>
+                <div class="form-group">
+                    <label>Description (Optional)</label>
+                    <textarea id="newWingDesc" rows="3"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="closeModal('addWingModal')">Cancel</button>
+                    <button type="submit" class="btn btn-success">Create Wing</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Report Modal -->
+    <div id="addReportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Report</h3>
+                <span class="close-modal" onclick="closeModal('addReportModal')">&times;</span>
+            </div>
+            <form onsubmit="handleAddReport(event)">
+                <div class="form-group">
+                    <label>Wing</label>
+                    <select id="addReportWing" required>
+                        <!-- Populated by JS -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Program Name</label>
+                    <input type="text" id="addReportName" placeholder="e.g. Quran Quiz" required>
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="addReportDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Participation Count</label>
+                    <input type="number" id="addReportParticipation" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label>Remarks</label>
+                    <select id="addReportRemarks">
+                        <option value="Excellent">Excellent</option>
+                        <option value="Very Good">Very Good</option>
+                        <option value="Good">Good</option>
+                        <option value="Average">Average</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="addReportDesc" rows="3"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="closeModal('addReportModal')">Cancel</button>
+                    <button type="submit" class="btn btn-success">Save Report</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Result Modal -->
+    <div id="addResultModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Result</h3>
+                <span class="close-modal" onclick="closeModal('addResultModal')">&times;</span>
+            </div>
+            <form onsubmit="handleAddResult(event)">
+                <div class="form-group">
+                    <label>Wing</label>
+                    <select id="addResultWing" required>
+                        <!-- Populated by JS -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Program Name</label>
+                    <input type="text" id="addResultName" required>
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="addResultDate" required>
+                </div>
+                <div class="form-group">
+                    <label>1st Place Winner</label>
+                    <input type="text" id="addResultFirst" required>
+                </div>
+                <div class="form-group">
+                    <label>2nd Place Winner</label>
+                    <input type="text" id="addResultSecond" required>
+                </div>
+                <div class="form-group">
+                    <label>3rd Place Winner</label>
+                    <input type="text" id="addResultThird" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="closeModal('addResultModal')">Cancel</button>
+                    <button type="submit" class="btn btn-success">Save Result</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Skills Modal (Student) -->
+    <div id="skillsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Skills</h3>
+                <span class="close-modal" onclick="closeModal('skillsModal')">&times;</span>
+            </div>
+            <div class="form-group">
+                <label>Skills (comma separated)</label>
+                <textarea id="skillsInput" rows="5" placeholder="e.g. Public Speaking, Arabic, Football"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="saveSkills()">Update</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teacher Skills Modal -->
+    <div id="teacherSkillsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Skills</h3>
+                <span class="close-modal" onclick="closeModal('teacherSkillsModal')">&times;</span>
+            </div>
+            <div class="form-group">
+                <label>Skills (comma separated)</label>
+                <textarea id="teacherSkillsInput" rows="5" placeholder="e.g. Mathematics, Physics, Biology"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="saveTeacherSkills()">Update</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div id="qrModal" class="modal">
+        <div class="modal-content" style="text-align: center;">
+            <div class="modal-header">
+                <h3>Scan QR Code</h3>
+                <span class="close-modal" onclick="closeModal('qrModal')">&times;</span>
+            </div>
+            <img id="qrCodeImage" src="" alt="QR Code" style="width: 200px; margin: 20px 0;">
+            <p>Scan to follow us!</p>
+        </div>
+    </div>
+
+    <!-- Sponsorship Modal -->
+    <div id="sponsorshipModal" class="modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header" style="background-color: var(--primary-color); color: white; padding: 20px; border-radius: 10px 10px 0 0;">
+                <h3 class="modal-title" style="font-size: 1.5rem;"><i class="fas fa-handshake"></i> Sponsorship Application</h3>
+                <span class="close-modal" onclick="closeModal('sponsorshipModal')" style="color: white;">&times;</span>
+            </div>
+            <div style="padding: 20px;">
+                <p style="margin-bottom: 20px; color: var(--text-secondary); text-align: center;">
+                    Your support can make a significant difference in a student's educational journey.
+                </p>
+                <form id="sponsorshipForm" onsubmit="handleSponsor(event)">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label for="sponsorName"><i class="fas fa-user"></i> Full Name</label>
+                            <input type="text" id="sponsorName" required placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="sponsorOrganization"><i class="fas fa-building"></i> Organization (Optional)</label>
+                            <input type="text" id="sponsorOrganization" placeholder="Enter your organization name">
+                        </div>
+                        <div class="form-group">
+                            <label for="sponsorEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                            <input type="email" id="sponsorEmail" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="sponsorPhone"><i class="fas fa-phone"></i> Phone Number</label>
+                            <input type="tel" id="sponsorPhone" required placeholder="Enter your phone number">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sponsorshipType"><i class="fas fa-gift"></i> Type of Sponsorship</label>
+                        <select id="sponsorshipType" required>
+                            <option value="">Select Sponsorship Type</option>
+                            <option value="academic">Academic Scholarship</option>
+                            <option value="educational">Educational Materials</option>
+                            <option value="events">Event Sponsorship</option>
+                            <option value="resources">Learning Resources</option>
+                            <option value="technology">Technology Support</option>
+                            <option value="mentorship">Mentorship Program</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sponsorshipDuration"><i class="fas fa-clock"></i> Sponsorship Duration</label>
+                        <select id="sponsorshipDuration" required>
+                            <option value="">Select Duration</option>
+                            <option value="one-time">One-time Contribution</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="quarterly">Quarterly</option>
+                            <option value="annually">Annually</option>
+                            <option value="custom">Custom Duration</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sponsorshipAmount"><i class="fas fa-money-bill-wave"></i> Sponsorship Amount Range (Optional)</label>
+                        <select id="sponsorshipAmount">
+                            <option value="">Select Amount Range</option>
+                            <option value="range1">Up to ₹10,000</option>
+                            <option value="range2">₹10,000 - ₹25,000</option>
+                            <option value="range3">₹25,000 - ₹50,000</option>
+                            <option value="range4">₹50,000 - ₹1,00,000</option>
+                            <option value="range5">Above ₹1,00,000</option>
+                            <option value="custom">Custom Amount</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="preferredStudents"><i class="fas fa-user-graduate"></i> Preferred Number of Students to Sponsor (Optional)</label>
+                        <input type="number" id="preferredStudents" min="1" placeholder="Enter number of students">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sponsorMessage"><i class="fas fa-comment-alt"></i> Additional Information</label>
+                        <textarea id="sponsorMessage" rows="4" required placeholder="Please share any specific requirements, preferences, or questions you may have"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="preferredContact"><i class="fas fa-phone-alt"></i> Preferred Contact Method</label>
+                        <select id="preferredContact" required>
+                            <option value="email">Email</option>
+                            <option value="phone">Phone</option>
+                            <option value="both">Both Email and Phone</option>
+                        </select>
+                    </div>
+
+                    <div style="margin: 20px 0;">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                            <input type="checkbox" required>
+                            <span style="font-size: 0.9rem; color: var(--text-secondary);">I agree to be contacted regarding my sponsorship application</span>
+                        </label>
+                    </div>
+
+                    <div class="modal-footer" style="gap: 15px;">
+                        <button type="button" class="btn btn-danger" onclick="closeModal('sponsorshipModal')">Cancel</button>
+                        <button type="submit" class="btn btn-success" style="padding: 12px 25px; background-color: var(--primary-color);">Submit Application</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ================= DATA (ALL DATA PRESERVED) =================
+        const members = [
+            { name: "Sadaf Ziya", username: "sadaf", password: "275", photo: "https://i.ibb.co/8DcxLfBy/cropped-circle-image-6.png", mobile: "9153450256", dob: "4/18/08", admissionNo: "1275", address: "Dipatoli Mahuwadanr, Latehar", skills: ["Public Speaking", "Quran Recitation"], isTeacher: false },
+            { name: "Sufiyan Ahmed Raza", username: "sufiyan", password: "1260", photo: "https://i.ibb.co/39kh698k/cropped-circle-image-7.png", mobile: "9887267698", dob: "7.11.2006", admissionNo: "1260", address: "Hussaini Masjid Marwadi", skills: ["Arabic", "Debate"], isTeacher: false },
+            { name: "Mohd Sahil", username: "sahil", password: "1234", photo: "https://via.placeholder.com/150", mobile: "70289067698", dob: "20.11.2006", admissionNo: "1234", address: "Dilwale Deeh", skills: ["Programming"], isTeacher: false },
+            { name: "Muhammed Sibgathullah", username: "sibgathullah", password: "1261", photo: "https://i.ibb.co/xV9zDwB/cropped-circle-image-15.png", mobile: "8820006933", dob: "24.02.2009", admissionNo: "1261", address: "Dadri, Nanpur", skills: ["Calligraphy", "Art"], isTeacher: false },
+            { name: "Md Zeeshan Shaikh", username: "zeeshan", password: "1277", photo: "", mobile: "9029137429", dob: "1.01.2007", admissionNo: "1277", address: "Bachharpur", skills: ["Urdu Poetry"], isTeacher: false },
+            { name: "Md Zaid", username: "zaid", password: "1237", photo: "", mobile: "8825345909", dob: "1.02.2009", admissionNo: "1237", address: "Saraja", skills: ["Sports"], isTeacher: false },
+            { name: "Abbu Shahma", username: "shahma", password: "1278", photo: "", mobile: "9570185919", dob: "8.01.2009", admissionNo: "1278", address: "Budhibir", skills: ["Science"], isTeacher: false },
+            { name: "Gulam Dastagir", username: "dastagir", password: "1268", photo: "https://i.ibb.co/m5P403qZ/cropped-circle-image-3.png", mobile: "8102853602", dob: "19.05.2009", admissionNo: "1268", address: "Majholi", skills: ["Leadership"], isTeacher: false },
+            { name: "Tosif Ansari", username: "tosif", password: "1274", photo: "https://i.ibb.co/1BVFhVY/cropped-circle-image-19.png", mobile: "8084385866", dob: "1.01.2006", admissionNo: "1274", address: "Hotwar", skills: ["Sports"], isTeacher: false },
+            { name: "Mohd Faisal", username: "faisal", password: "1254", photo: "https://i.ibb.co/k66BxwW8/cropped-circle-image-16.png", mobile: "9098447965", dob: "5.5.2006", admissionNo: "1254", address: "Satna", skills: ["Writing"], isTeacher: false },
+            { name: "Md Firoz Alam", username: "firoz", password: "1249", photo: "https://i.ibb.co/4RLXbrZF/cropped-circle-image-4.png", mobile: "7710839055", dob: "28.02.2007", admissionNo: "1249", address: "Singhia Dulali", skills: ["Mathematics"], isTeacher: false },
+            { name: "Asjad Raza", username: "asjad", password: "1283", photo: "", mobile: "6206112926", dob: "31.03.2008", admissionNo: "1283", address: "Bachharpur", skills: ["Public Speaking"], isTeacher: false },
+            { name: "md mosaheb ali", username: "mosaheb", password: "1210", photo: "", mobile: "7488553957", dob: "1.01.2007", admissionNo: "1210", address: "Sharflotwa", skills: ["Academic Excellence"], isTeacher: false },
+            { name: "Md Shamshad", username: "shamshad", password: "1201", photo: "https://i.ibb.co/svhkxwSD/cropped-circle-image-5.png", mobile: "7004665257", dob: "15.7.2007", admissionNo: "1201", address: "Satlakha Dih Tol", skills: ["Quran Recitation"], isTeacher: false },
+            { name: "Md Achhe Miyan", username: "achhe", password: "1197", photo: "https://i.ibb.co/ycQFNYFZ/cropped-circle-image-9.png", mobile: "6267812053", dob: "27.9.2007", admissionNo: "1197", address: "Sharflotwa", skills: ["Technology"], isTeacher: false },
+            { name: "Hanzala Maqsoom", username: "hanzala", password: "1161", photo: "https://i.ibb.co/Vc7HPgvz/cropped-circle-image-12.png", mobile: "6238700212", dob: "20.9.2006", admissionNo: "1161", address: "Kaharwadi", skills: ["Music"], isTeacher: false },
+            { name: "Hasan Raza", username: "hasan", password: "1169", photo: "", mobile: "8619983305", dob: "19.9.2005", admissionNo: "1169", address: "Kaharwadi", skills: ["Technology"], isTeacher: false },
+            { name: "Thajudheen", username: "thajudheen", password: "1207", photo: "", mobile: "7022354081", dob: "18.6.2006", admissionNo: "1207", address: "Kollahalli", skills: ["Quran Memorization"], isTeacher: false },
+            { name: "Rehan Ahmed", username: "rehan", password: "1674", photo: "https://i.ibb.co/LDL4FwD2/cropped-circle-image-17.png", mobile: "8736811786", dob: "19.10.2008", admissionNo: "1674", address: "Tenu", skills: ["Sports"], isTeacher: false },
+            { name: "Kaunain", username: "kaunain", password: "1675", photo: "", mobile: "8329540137", dob: "13.7.2008", admissionNo: "1675", address: "Diwan Shah", skills: ["Art"], isTeacher: false },
+            { name: "Afran Shaikh", username: "afran", password: "1676", photo: "https://i.ibb.co/CsnGPBVj/cropped-circle-image-2.png", mobile: "7406147786", dob: "17.8.2009", admissionNo: "1676", address: "Kanakadasa", skills: ["Leadership"], isTeacher: false },
+            { name: "Arsalan", username: "arsalan", password: "1677", photo: "", mobile: "8087387374", dob: "6.03.2006", admissionNo: "1677", address: "Gaibi Nagar", skills: ["Science"], isTeacher: false },
+            { name: "Md Sabir", username: "sabir", password: "1678", photo: "https://i.ibb.co/PZLxWJmS/cropped-circle-image-10.png", mobile: "9740033287", dob: "6.03.2008", admissionNo: "1678", address: "Devagiri", skills: ["Sports"], isTeacher: false },
+            { name: "Ulfat Hussain", username: "ulfat", password: "1679", photo: "https://i.ibb.co/LXKNn4rf/cropped-circle-image-3.png", mobile: "8095485963", dob: "23.01.2007", admissionNo: "1679", address: "Kadammanagar", skills: ["Literature"], isTeacher: false },
+            // Teacher Example (For Demo)
+            { name: "Dr. Asjad Raza", username: "teacher_asjad", password: "1234", photo: "https://via.placeholder.com/150", mobile: "9876543210", dob: "01.01.1990", admissionNo: "TEACH001", address: "University Campus", department: "Science", email: "asjad.teacher@alhikma.com", subject: "Physics", skills: ["Physics", "Research", "Mentoring"], isTeacher: true },
+            // Admin
+            { name: "System Administrator", username: "Admin", password: "admin@alhikma", photo: "https://i.ibb.co/KxJcRghK/unnamed.png", admissionNo: "ADMIN", isAdmin: true, address: "Admin Office", skills: ["Admin"] }
+        ];
+
+        const committeeMembers = [
+            { name: "Md Zeeshan Khan", image: "https://i.ibb.co/xV9zDwB/cropped-circle-image-15.png", role: "Class President", description: "Leading with vision and dedication to ensure the success of our batch.", phone: "7352126871", email: "mdjishan245@gmail.com" },
+            { name: "Muhammed Sibgathullah", image: "https://i.ibb.co/xV9zDwB/cropped-circle-image-15.png", role: "Class Secretary", description: "Coordinating activities and maintaining records with precision.", phone: "7894561230", email: "sibgathullah1261@gmail.com" },
+            { name: "Md Frioz Alam", image: "https://i.ibb.co/4RLXbrZF/cropped-circle-image-4.png", role: "Class Treasurer", description: "Managing finances and ensuring transparent fund administration.", phone: "3214569870", email: "firozalam789@gmail.com" }
+        ];
+
+        // Initial Gallery Data (Preserved)
+        let galleryImages = [
+            { id: 101, url: "https://i.ibb.co/5g2X3m2K/IMG-20250516-WA0009.jpg", category: "general", desc: "Batch Activity" },
+            { id: 102, url: "https://i.ibb.co/LdqhgR1N/IMG-20250614-WA0054.jpg", category: "general", desc: "Classroom" },
+            { id: 103, url: "https://i.ibb.co/84DhyjcB/IMG-20230126-163115-522-1.jpg", category: "general", desc: "Students" },
+            { id: 104, url: "https://i.ibb.co/d44tzj7y/IMG-20250614-WA0058.jpg", category: "general", desc: "Event" },
+            { id: 105, url: "https://i.ibb.co/BVcBS26t/IMG-20220905-224321-829.jpg", category: "general", desc: "Campus" },
+            { id: 106, url: "https://i.ibb.co/Z1WDNds0/Poster-2.jpg", category: "general", desc: "Event Poster" },
+            { id: 107, url: "https://i.ibb.co/KjbQcxg2/IMG-20220905-224530-228-1.jpg", category: "general", desc: "Group Activity" },
+            { id: 108, url: "https://i.ibb.co/ycwxnHhw/IMG-20230126-163133-371-5.jpg", category: "general", desc: "Campus Life" },
+            { id: 109, url: "https://i.ibb.co/23zz1RXm/20221219-144745-1.jpg", category: "general", desc: "Student Activities" },
+            { id: 110, url: "https://i.ibb.co/0yPSYnmr/topper-of-fanstat.jpg", category: "general", desc: "Study Group" },
+            { id: 111, url: "https://i.ibb.co/qMk2Pbjs/poster-final.jpg", category: "general", desc: "Science Expo" },
+            { id: 112, url: "https://i.ibb.co/Tx85qNGT/culture-night-final-1.png", category: "general", desc: "Quran Competition" },
+            { id: 113, url: "https://i.ibb.co/HpMfm132/news-paper-to-upload-page-0001.jpg", category: "general", desc: "Sports Day" },
+            { id: 114, url: "https://i.ibb.co/tMM5njKX/Screenshot-2025-10-27-144345.png", category: "general", desc: "Library" },
+            { id: 115, url: "https://i.ibb.co/XZgV4rkd/Screenshot-2025-10-27-144511.png", category: "general", desc: "Graduation Day" },
+            { id: 116, url: "https://i.ibb.co/GQSZyrZZ/my-third-life.png", category: "general", desc: "Cultural Fest" },
+            { id: 117, url: "https://i.ibb.co/DPm8ZWtY/Black-Modern-Minimal-Annual-Company-Awards-Made-with-Poster-My-Wall.png", category: "general", desc: "Debate Competition" },
+            { id: 118, url: "https://i.ibb.co/JRn8jyJY/news-pap-page-0001.jpg", category: "general", desc: "Annual Day" },
+            { id: 201, url: "https://i.ibb.co/0yPSYnmr/topper-of-fanstat.jpg", category: "achievements", desc: "Academic Achievement - Top Performer" },
+            { id: 202, url: "https://i.ibb.co/qMk2Pbjs/poster-final.jpg", category: "achievements", desc: "Science Exhibition Winner" },
+            { id: 203, url: "https://i.ibb.co/HpMfm132/news-paper-to-upload-page-0001.jpg", category: "achievements", desc: "Competition Winner Feature" },
+            { id: 204, url: "https://i.ibb.co/DPm8ZWtY/Black-Modern-Minimal-Annual-Company-Awards-Made-with-Poster-My-Wall.png", category: "achievements", desc: "Awards Ceremony" },
+            { id: 205, url: "https://i.ibb.co/6J1jhfZx/hasan.jpg", category: "achievements", desc: "Cultural Competition Winner" },
+            { id: 206, url: "https://i.ibb.co/dwr1cZfc/sufiyana.jpg", category: "achievements", desc: "Outstanding Student Award" },
+            { id: 207, url: "https://i.ibb.co/WvNFBWVL/achhe-miyan-poster.jpg", category: "achievements", desc: "Academic Excellence Award" },
+            { id: 208, url: "https://i.ibb.co/KzhjJgtC/BOOK-REVIEW-2nd.jpg", category: "achievements", desc: "Research Achievement" },
+            { id: 209, url: "https://i.ibb.co/vvTNB54y/shamshad-2.jpg", category: "achievements", desc: "Media Recognition" },
+            { id: 210, url: "https://i.ibb.co/DfcNThMX/sufiyan.jpg", category: "achievements", desc: "Leadership Award" },
+            { id: 211, url: "https://i.ibb.co/9mknHFG9/firoz.jpg", category: "achievements", desc: "Community Service Achievement" },
+            { id: 212, url: "https://i.ibb.co/DHhDt0Wk/Competition-Results-Made-with-Poster-My-Wall.jpg", category: "achievements", desc: "Special Recognition" },
+            { id: 213, url: "https://i.ibb.co/23zz1RXm/20221219-144745-1.jpg", category: "achievements", desc: "Innovation Award" },
+            { id: 214, url: "https://i.ibb.co/Z1WDNds0/Poster-2.jpg", category: "achievements", desc: "Best Performance Award" }
+        ];
+
+        // Initial Wings Data
+        let wingsList = [
+            { id: "language", name: "Language" },
+            { id: "general_knowledge", name: "General Knowledge" },
+            { id: "tafsir", name: "Tafsir & Science" },
+            { id: "viva", name: "Viva" }
+        ];
+
+        // Reports Data (Preserved)
+        let wingPrograms = {
+            language: [
+                { id: 1, name: "مجمع البحرين", date: "2023-05-22", participation: 24, remarks: "Good", description: "Bahrain Assembly program" },
+                { id: 2, name: "Tying", date: "2023-05-14", participation: 11, remarks: "Good", description: "Tying program" },
+                { id: 3, name: "Fiqha Clas", date: "2023-05-16", participation: 12, remarks: "Good", description: "Fiqh Class program" },
+                { id: 4, name: "G.K Quiz", date: "2023-05-19", participation: 9, remarks: "Good", description: "General Knowledge Quiz program" },
+                { id: 5, name: "Fiqah Mcq", date: "2023-05-30", participation: 15, remarks: "Excellence", description: "Fiqh MCQ program" },
+                { id: 6, name: "Urdu Debate", date: "2023-05-20", participation: 12, remarks: "Good", description: "Urdu Debate program" },
+                { id: 7, name: "Thanfus", date: "2023-05-22", participation: 16, remarks: "Good", description: "Thanfus program" },
+                { id: 8, name: "Magzine", date: "2023-05-17", participation: 25, remarks: "Good", description: "Magazine program" },
+                { id: 9, name: "News Paper", date: "2023-05-24", participation: 25, remarks: "Good", description: "Newspaper program" },
+                { id: 10, name: "22 Majma ul Bahrain", date: "2023-05-22", participation: 8, remarks: "Good", description: "22 Majma ul Bahrain program" },
+                { id: 11, name: "Scince master", date: "2023-05-26", participation: 18, remarks: "Good", description: "Science Master program" }
+            ],
+            general_knowledge: [
+                { id: 12, name: "G.K Quiz", date: "2023-05-19", participation: 7, remarks: "Good", description: "General Knowledge Quiz program" }
+            ],
+            tafsir: [
+                { id: 13, name: "Quran quiz (quizzes)", date: "2023-06-01", participation: 15, remarks: "Good", description: "Quran Quiz program" },
+                { id: 14, name: "سبع لقرأة", date: "2023-06-02", participation: 7, remarks: "Good", description: "Seven for Recitation program" },
+                { id: 15, name: "ألم يتدبروا القران with science", date: "2023-06-03", participation: 9, remarks: "Good", description: "Have they not pondered the Quran with science program" },
+                { id: 16, name: "Dr. Zakir naik", date: "2023-06-04", participation: 11, remarks: "Good", description: "Dr. Zakir Naik videos program (7 days)" },
+                { id: 17, name: "Book quiz", date: "2023-06-05", participation: 16, remarks: "Good", description: "Book Quiz program" },
+                { id: 18, name: "Seminar on Muslims scholar related Tafsir", date: "2023-06-06", participation: 15, remarks: "Good", description: "Seminar on Muslim Scholars related to Tafsir program" },
+                { id: 19, name: "Research and ppt", date: "2023-06-07", participation: 14, remarks: "Good", description: "Research and PPT program" },
+                { id: 20, name: "Qur'anic Recitation with Meaning (تفسير الجلالين)", date: "2023-06-08", participation: 13, remarks: "Good", description: "Qur'anic Recitation with Meaning program" },
+                { id: 21, name: "Type of Universe", date: "2023-06-09", participation: 18, remarks: "Good", description: "Type of Universe program" },
+                { id: 22, name: "Science expo", date: "2023-06-10", participation: 24, remarks: "Good", description: "Science Expo program" },
+                { id: 23, name: "Qur'an Video Theatre", date: "2023-06-11", participation: 24, remarks: "Good", description: "Qur'an Video Theatre program (3D videos for 7 days)" },
+                { id: 24, name: "Current Scientists & Scholars", date: "2023-06-12", participation: 22, remarks: "Good", description: "Current Scientists & Scholars program (Class after maghrib)" },
+                { id: 25, name: "Inventions and Inventors (100)", date: "2023-06-13", participation: 16, remarks: "Good", description: "Inventions and Inventors program (100)" },
+                { id: 26, name: "Informative videos on science", date: "2023-06-14", participation: 18, remarks: "Good", description: "Informative videos on science program (7 days)" },
+                { id: 27, name: "Infectious Diseases: Types, Causes & Treatments", date: "2023-06-15", participation: 16, remarks: "Good", description: "Infectious Diseases program" },
+                { id: 28, name: "Benefits move on science", date: "2023-06-16", participation: 24, remarks: "Good", description: "Benefits move on science program" },
+                { id: 29, name: "Regional Science Centre and Planetarium", date: "2023-06-17", participation: 24, remarks: "Good", description: "Regional Science Centre and Planetarium program" },
+                { id: 30, name: "Best students award", date: "2023-06-18", participation: 0, remarks: "Good", description: "Best Students Award program" },
+                { id: 31, name: "Award distribution ceremony poster making", date: "2023-06-19", participation: 7, remarks: "Good", description: "Award Distribution Ceremony program" }
+            ],
+            viva: [
+                { id: 32, name: "English Grammer", date: "2023-06-11", participation: 0, remarks: "Good", description: "English Grammar program (11 to 18)" },
+                { id: 33, name: "النحو الواضح", date: "2023-06-18", participation: 0, remarks: "Good", description: "Clear Grammar program (18 to 25)" },
+                { id: 34, name: "Self-introduction", date: "2023-06-27", participation: 0, remarks: "Good", description: "Self-Introduction program" },
+                { id: 35, name: "مجلة النهضة", date: "2023-06-01", participation: 0, remarks: "Good", description: "Renaissance Magazine program (Every day)" },
+                { id: 36, name: "News paper", date: "2023-06-01", participation: 0, remarks: "Good", description: "Newspaper program (Every day)" },
+                { id: 37, name: "General Knowledge", date: "2023-06-14", participation: 0, remarks: "Good", description: "General Knowledge program (14 to 21)" },
+                { id: 38, name: "Islamic knowledge", date: "2023-06-20", participation: 0, remarks: "Good", description: "Islamic Knowledge program (20 to 27)" },
+                { id: 39, name: "ألفية ابن مالك", date: "2023-06-28", participation: 0, remarks: "Good", description: "Alfiyyah Ibn Malik program" },
+                { id: 40, name: "Current affairs", date: "2023-06-12", participation: 0, remarks: "Good", description: "Current Affairs program (12 to 31)" },
+                { id: 41, name: "حفظ السورة", date: "2023-06-25", participation: 0, remarks: "Good", description: "Memorization of Surah program" }
+            ]
+        };
+
+        // Full Results Data (Preserved)
+        let wingResults = {
+            language: [
+                { id: 1, name: "مجمع البحرين", date: "2023-05-22", winners: ["Sadaf Ziya", "Muhammad Sibgathullah", "Md Zeeshan"] },
+                { id: 2, name: "Tying", date: "2023-05-14", winners: ["Muhammed Sibgathullah", "MD Zeeshan Shaikh", "MD Zaid Raza"] },
+                { id: 3, name: "Fiqha Clas", date: "2023-05-16", winners: ["sabir", "Hanzala", "shamshad"] },
+                { id: 4, name: "G.K Quiz", date: "2023-05-19", winners: ["Tosif", "Abbu Shahma", "MD mosaheb Ali"] },
+                { id: 5, name: "Fiqah Mcq", date: "2023-05-30", winners: ["shamshad", "Md Achhe Miyan", "tosif Ansari"] },
+                { id: 6, name: "Urdu Debate", date: "2023-05-20", winners: ["Firoz Alam", "Hanzala Maqsoom", "Asjad Raza"] },
+                { id: 7, name: "Thanfus", date: "2023-05-22", winners: ["Hasan Raza", "Thajudheen", "Rehan Ahmed"] },
+                { id: 8, name: "Magzine", date: "2023-05-17", winners: ["UL Hussain and Team", "Arsalan and team", "shamshad and team"] },
+                { id: 9, name: "News Paper", date: "2023-05-24", winners: ["kaunain and team", "tosif and team", "Abbu shahma and team"] },
+                { id: 10, name: "22 Majma ul Bahrain", date: "2023-05-22", winners: ["sadaf ziya", "Muhammed sibgathullah", "Mohd sahil"] },
+                { id: 11, name: "Scince master", date: "2023-05-26", winners: ["sufiyan Ahmed Raza", "md zaid Raza", "Mosheb Ali"] }
+            ],
+            general_knowledge: [
+                { id: 12, name: "G.K Quiz", date: "2023-05-19", winners: ["sufiyan Ahmed Raza", "md zaid Raza", "Mosheb Ali"] }
+            ],
+            tafsir: [
+                { id: 13, name: "Quran quiz (quizzes)", date: "2023-06-01", winners: ["achhe Miyan", "tosif Ansari", "hanzala Maqsoom"] },
+                { id: 14, name: "سبع لقرأة", date: "2023-06-02", winners: ["ab shahma", "md zaid Raza", "Ache Miyan"] },
+                { id: 15, name: "ألم يتدبروا القران with science", date: "2023-06-03", winners: ["Mohd faisal", "Asjad Raza", "hasan Raza"] },
+                { id: 16, name: "Dr. Zakir naik", date: "2023-06-04", winners: ["thajudheen", "Rehan Ahmed", "kaunain"] },
+                { id: 17, name: "Book quiz", date: "2023-06-05", winners: [] }, // Original had empty winners
+                { id: 18, name: "Seminar on Muslims scholar related Tafsir", date: "2023-06-06", winners: ["Mosaheb Ali", "Tajuddin", "kaunain ansari"] },
+                { id: 19, name: "Research and ppt", date: "2023-06-07", winners: ["Md zaid raza", "Mosheb Ali", "Firoz Alam"] },
+                { id: 20, name: "Qur'anic Recitation with Meaning (تفسير الجلالين)", date: "2023-06-08", winners: ["Ache miyan", "tausif Anasari", "afran"] },
+                { id: 21, name: "Type of Universe", date: "2023-06-09", winners: ["Muhamme sibgathullah", "Asjad Raza", "arsalan"] },
+                { id: 22, name: "Science expo", date: "2023-06-10", winners: [] }, // Original had empty winners
+                { id: 23, name: "Qur'an Video Theatre", date: "2023-06-11", winners: [] }, // Original had empty winners
+                { id: 24, name: "Current Scientists & Scholars", date: "2023-06-12", winners: [] }, // Original had empty winners
+                { id: 25, name: "Inventions and Inventors (100)", date: "2023-06-13", winners: [] }, // Original had empty winners
+                { id: 26, name: "Informative videos on science", date: "2023-06-14", winners: [] }, // Original had empty winners
+                { id: 27, name: "Infectious Diseases: Types, Causes & Treatments", date: "2023-06-15", winners: ["Mohd faisal", "Asjad Raza", "hasan Raza"] },
+                { id: 28, name: "Benefits move on science", date: "2023-06-16", winners: [] }, // Original had empty winners
+                { id: 29, name: "Regional Science Centre and Planetarium", date: "2023-06-17", winners: [] }, // Original had empty winners
+                { id: 30, name: "Best students award", date: "2023-06-18", winners: ["sadaf ziya", "Rehan Ahmed", "Shamshad"] },
+                { id: 31, name: "Award distribution ceremony poster making", date: "2023-06-19", winners: ["zeeshan Shaikh", "Muhammed sibgathullah", "md zaid Raza"] }
+            ],
+            viva: [] // Viva results were empty in original
+        };
+
+        // SPONSORSHIPS DATA (NEW STORAGE)
+        let sponsorships = [];
+
+        const socialData = {
+            instagram: 'https://i.ibb.co/Rp6gTkpc/INST-2-1.png',
+            youtube: 'https://i.ibb.co/S4X0R7nj/YOU.png', 
+            facebook: 'https://i.ibb.co/S4X0R7nj/YOU.png', 
+            twitter: 'https://i.ibb.co/xy2y1PMR/twitter-qr.png'
+        };
+
+        // State
+        let currentUser = null;
+        let currentReportFilter = 'all';
+        let currentResultFilter = 'all';
+        let currentGalleryFilter = 'general';
+
+        // ================= INITIALIZATION =================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCommittee();
+            renderMembers();
+            renderWings(); 
+            filterReports('all');
+            filterResults('all');
+            renderGallery(); 
+            renderSponsorshipRequests();
+        });
+
+        // ================= NAVIGATION =================
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            const section = document.getElementById(sectionId);
+            if(section) section.classList.add('active');
+            
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            const navLink = document.querySelector(`nav a[onclick*="${sectionId}"]`);
+            if(navLink) navLink.classList.add('active');
+
+            document.getElementById('mainNav').classList.remove('active');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mainNav').classList.toggle('active');
+        }
+
+        // ================= COMMITTEE LOGIC (Original Style) =================
+        function renderCommittee() {
+            const container = document.getElementById('committeeContainer');
+            if (!container) return;
+
+            container.innerHTML = Object.values(committeeMembers).map(member => `
+                <div class="committee-card">
+                    <div class="committee-image-container">
+                        <img src="${member.image}" alt="${member.role}" class="committee-image" onerror="this.src='https://via.placeholder.com/300x400?text=Committee+Member'">
+                        <div class="committee-info">
+                            <h3>${member.role}</h3>
+                            <p>${member.name}</p>
+                        </div>
+                    </div>
+                    <div class="committee-content">
+                        <p>${member.description}</p>
+                        <div class="committee-contact">
+                            <span class="contact-button" onclick="contactMember('${member.phone}', 'phone')">
+                                <i class="fas fa-phone"></i> Contact
+                            </span>
+                            <span class="contact-button" onclick="contactMember('${member.email}', 'email')">
+                                <i class="fas fa-envelope"></i> Email
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function contactMember(contact, type) {
+            if (type === 'phone') {
+                window.location.href = `tel:${contact}`;
+            } else if (type === 'email') {
+                const subject = 'Contact from Batch Union Website';
+                const body = 'Dear Committee Member,%0D%0A%0D%0A'; // %0D%0A is for line breaks
+                window.location.href = `mailto:${contact}?subject=${encodeURIComponent(subject)}&body=${body}`;
+                showToast('Opening email client...', 'success');
+            }
+        }
+
+        // ================= RENDER FUNCTIONS =================
+        function renderMembers() {
+            const container = document.getElementById('membersGrid');
+            container.innerHTML = members.filter(m => !m.isAdmin && !m.isTeacher).map(m => `
+                <div class="member-card">
+                    <img src="${m.photo}" alt="${m.name}" class="member-avatar">
+                    <div class="member-name">${m.name}</div>
+                    <div class="member-details">${m.admissionNo}</div>
+                    <button class="btn btn-primary" style="padding: 5px 15px; font-size: 0.8rem;" onclick="viewProfile('${m.username}')">View Profile</button>
+                </div>
+            `).join('');
+        }
+
+        // ================= GALLERY LOGIC =================
+        function renderGallery() {
+            const generalGrid = document.getElementById('general-gallery-grid');
+            const achieveGrid = document.getElementById('achievements-gallery-grid');
+            
+            const filteredImages = galleryImages.filter(img => img.category === currentGalleryFilter);
+
+            const createCard = (img) => `
+                <div class="gallery-item">
+                    <img src="${img.url}" alt="${img.desc}">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                    ${currentUser && currentUser.isAdmin ? `
+                        <div class="gallery-delete">
+                            <button class="delete-btn" onclick="deleteGalleryItem(${img.id})"><i class="fas fa-trash"></i></button>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            generalGrid.innerHTML = filteredImages.filter(img => img.category === 'general').map(createCard).join('');
+            achieveGrid.innerHTML = filteredImages.filter(img => img.category === 'achievements').map(createCard).join('');
+        }
+
+        function showGalleryContent(type) {
+            currentGalleryFilter = type;
+            document.querySelectorAll('.gallery-tab').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.gallery-content').forEach(c => c.style.display = 'none');
+            document.getElementById(`${type}-gallery`).style.display = 'block';
+            if(event) event.target.classList.add('active');
+            renderGallery(); 
+        }
+
+        function openAddGalleryModal() {
+            if(!currentUser || !currentUser.isAdmin) {
+                showToast('Access Denied: Admin Only', 'error');
+                return;
+            }
+            document.getElementById('addGalleryModal').classList.add('show');
+        }
+
+        function handleAddGalleryItem(e) {
+            e.preventDefault();
+            const url = document.getElementById('addGalleryUrl').value;
+            const category = document.getElementById('addGalleryCategory').value;
+            const desc = document.getElementById('addGalleryDesc').value || "New Image";
+
+            const newImg = {
+                id: Date.now(),
+                url: url,
+                category: category,
+                desc: desc
+            };
+
+            galleryImages.push(newImg);
+            renderGallery();
+            closeModal('addGalleryModal');
+            showToast('Image added successfully!', 'success');
+        }
+
+        function deleteGalleryItem(id) {
+            if(!confirm("Are you sure you want to delete this image?")) return;
+            galleryImages = galleryImages.filter(img => img.id !== id);
+            renderGallery();
+            showToast('Image deleted.', 'info');
+        }
+
+        // ================= WINGS LOGIC =================
+        function renderWings() {
+            const container = document.getElementById('wingButtons');
+            if (!container) return;
+
+            container.innerHTML = wingsList.map(w => `
+                <button class="wing-btn ${currentReportFilter === w.id ? 'active' : ''}" onclick="filterReports('${w.id}')">${w.name}</button>
+            `).join('');
+            
+            const addReportSelect = document.getElementById('addReportWing');
+            const addResultSelect = document.getElementById('addResultWing');
+            if(addReportSelect && addResultSelect) {
+                addReportSelect.innerHTML = wingsList.map(w => `<option value="${w.id}">${w.name}</option>`).join('');
+                addResultSelect.innerHTML = wingsList.map(w => `<option value="${w.id}">${w.name}</option>`).join('');
+            }
+        }
+
+        function openAddWingModal() {
+            if(!currentUser || !currentUser.isAdmin) {
+                showToast('Access Denied: Admin Only', 'error');
+                return;
+            }
+            document.getElementById('addWingModal').classList.add('show');
+        }
+
+        function handleAddWing(e) {
+            e.preventDefault();
+            const name = document.getElementById('newWingName').value;
+            const id = name.toLowerCase().replace(/\s+/g, '_');
+            
+            if (wingsList.find(w => w.id === id)) {
+                showToast('Wing with this name already exists!', 'warning');
+                return;
+            }
+
+            wingsList.push({ id: id, name: name });
+            wingPrograms[id] = [];
+            wingResults[id] = [];
+
+            renderWings();
+            closeModal('addWingModal');
+            showToast('New Wing Created Successfully!', 'success');
+        }
+
+        // ================= REPORTS LOGIC =================
+        function filterReports(wing) {
+            currentReportFilter = wing;
+            // Manually update button classes since dynamic
+            document.querySelectorAll('#wingButtons .wing-btn').forEach(b => b.classList.remove('active'));
+            const btn = document.querySelector(`#wingButtons button[onclick="filterReports('${wing}')"]`);
+            if(btn) btn.classList.add('active');
+
+            let data = [];
+            if(wingPrograms[wing]) {
+                data = wingPrograms[wing] || [];
+            } else {
+                // If looking at all, combine
+                Object.values(wingPrograms).forEach(arr => data.push(...arr));
+            }
+            
+            data.sort((a,b) => new Date(b.date) - new Date(a.date));
+
+            const output = document.getElementById('reportsOutput');
+            if(data.length === 0) {
+                output.innerHTML = '<p style="text-align:center; color:#888;">No reports found for this wing.</p>';
+                return;
+            }
+
+            output.innerHTML = `
+                <div class="table-responsive">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>Program</th>
+                                <th>Date</th>
+                                <th>Participants</th>
+                                <th>Remarks</th>
+                                <th class="action-col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.map(r => `
+                                <tr>
+                                    <td>${r.name}</td>
+                                    <td>${r.date}</td>
+                                    <td>${r.participation}</td>
+                                    <td>${r.remarks}</td>
+                                    <td class="action-col">
+                                        ${currentUser && currentUser.isAdmin ? `
+                                            <button class="delete-btn" onclick="deleteReport(${r.id}, '${wing}')"><i class="fas fa-trash"></i></button>
+                                        ` : ''}
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function deleteReport(id, wing) {
+            if(!currentUser || !currentUser.isAdmin) return;
+            
+            if(wingPrograms[wing]) {
+                wingPrograms[wing] = wingPrograms[wing].filter(r => r.id !== id);
+            }
+            
+            filterReports(currentReportFilter);
+            showToast('Report deleted', 'info');
+        }
+
+        function openAddReportModal() {
+            if(!currentUser || !currentUser.isAdmin) {
+                showToast('Access Denied: Admin Only', 'error');
+                return;
+            }
+            document.getElementById('addReportModal').classList.add('show');
+        }
+
+        function handleAddReport(e) {
+            e.preventDefault();
+            const wing = document.getElementById('addReportWing').value;
+            const newReport = {
+                id: Date.now(),
+                name: document.getElementById('addReportName').value,
+                date: document.getElementById('addReportDate').value,
+                participation: parseInt(document.getElementById('addReportParticipation').value),
+                remarks: document.getElementById('addReportRemarks').value,
+                description: document.getElementById('addReportDesc').value
+            };
+
+            if(!wingPrograms[wing]) wingPrograms[wing] = [];
+            wingPrograms[wing].push(newReport);
+
+            filterReports(currentReportFilter);
+            closeModal('addReportModal');
+            showToast('Report added successfully!', 'success');
+        }
+
+        // ================= RESULTS LOGIC =================
+        function filterResults(wing) {
+            currentResultFilter = wing;
+            document.querySelectorAll('#resultWingButtons .wing-btn').forEach(b => b.classList.remove('active'));
+            const btn = document.querySelector(`#resultWingButtons button[onclick="filterResults('${wing}')"]`);
+            if(btn) btn.classList.add('active');
+
+            let data = [];
+            if(wingResults[wing]) {
+                data = wingResults[wing] || [];
+            } else {
+                Object.values(wingResults).forEach(arr => data.push(...arr));
+            }
+
+            data.sort((a,b) => new Date(b.date) - new Date(a.date));
+
+            const output = document.getElementById('resultsOutput');
+            if(data.length === 0) {
+                output.innerHTML = '<p style="text-align:center; color:#888;">No results found.</p>';
+                return;
+            }
+
+            output.innerHTML = data.map(r => `
+                <div class="program-result-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <h3 style="color:var(--primary-color);">${r.name}</h3>
+                        <span style="color:#777;">${r.date}</span>
+                    </div>
+                    <div class="winner-grid">
+                        ${r.winners && r.winners.length > 0 ? 
+                            r.winners.map((w, i) => `
+                                <div class="winner-card">
+                                    <div class="winner-medal">${i===0?'🥇':i===1?'🥈':'🥉'}</div>
+                                    <div style="font-weight:600; font-size:0.9rem;">${w}</div>
+                                </div>
+                            `).join('') : 
+                            `<p style="text-align:center; padding:15px; color:#999;">Winners pending...</p>`
+                        }
+                    </div>
+                    ${currentUser && currentUser.isAdmin ? `<button class="result-delete" onclick="deleteResult(${r.id}, '${wing}')"><i class="fas fa-trash"></i></button>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function deleteResult(id, wing) {
+            if(!currentUser || !currentUser.isAdmin) return;
+
+            if(wingResults[wing]) {
+                wingResults[wing] = wingResults[wing].filter(r => r.id !== id);
+            }
+
+            filterResults(currentResultFilter);
+            showToast('Result deleted', 'info');
+        }
+
+        function openAddResultModal() {
+            if(!currentUser || !currentUser.isAdmin) {
+                showToast('Access Denied: Admin Only', 'error');
+                return;
+            }
+            document.getElementById('addResultModal').classList.add('show');
+        }
+
+        function handleAddResult(e) {
+            e.preventDefault();
+            const wing = document.getElementById('addResultWing').value;
+            const newResult = {
+                id: Date.now(),
+                name: document.getElementById('addResultName').value,
+                date: document.getElementById('addResultDate').value,
+                winners: [
+                    document.getElementById('addResultFirst').value,
+                    document.getElementById('addResultSecond').value,
+                    document.getElementById('addResultThird').value
+                ]
+            };
+
+            if(!wingResults[wing]) wingResults[wing] = [];
+            wingResults[wing].push(newResult);
+
+            filterResults(currentResultFilter);
+            closeModal('addResultModal');
+            showToast('Result added successfully!', 'success');
+        }
+
+        // ================= AUTHENTICATION =================
+        function openLoginOptionsModal() {
+            document.getElementById('loginModal').classList.add('show');
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('loginUsername').value;
+            const p = document.getElementById('loginPassword').value;
+            
+            const user = members.find(m => m.username === u && m.password === p);
+            if(user) {
+                currentUser = user;
+                closeModal('loginModal');
+                document.getElementById('logoutBtn').style.display = 'inline-block';
+                document.querySelector('.user-actions .btn-outline').style.display = 'none';
+                
+                const adminBtns = ['adminControls-reports', 'adminControls-results', 'adminControls-gallery', 'adminControls-addWing'];
+                adminBtns.forEach(id => {
+                    if(user.isAdmin) document.getElementById(id).style.display = 'block';
+                    else document.getElementById(id).style.display = 'none';
+                });
+
+                showToast(`Welcome, ${user.name}`, 'success');
+                
+                if(user.isTeacher) {
+                    showSection('teachers');
+                    populateTeacherProfile(user);
+                } else if (user.isAdmin) {
+                    showSection('adminHome');
+                } else {
+                    showSection('profile');
+                    populateProfile(user);
+                }
+            } else {
+                showToast('Invalid credentials', 'error');
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('logoutBtn').style.display = 'none';
+            document.querySelector('.user-actions .btn-outline').style.display = 'inline-block';
+            
+            const adminBtns = ['adminControls-reports', 'adminControls-results', 'adminControls-gallery', 'adminControls-addWing'];
+            adminBtns.forEach(id => document.getElementById(id).style.display = 'none');
+            
+            showSection('home');
+            showToast('Logged out', 'info');
+        }
+
+        function viewProfile(username) {
+            const user = members.find(m => m.username === username);
+            if(currentUser && (currentUser.username === username || currentUser.isAdmin)) {
+                showSection('profile');
+                populateProfile(user);
+            } else {
+                showToast('Please login to view full profile', 'warning');
+                openLoginOptionsModal();
+            }
+        }
+
+        function populateProfile(user = currentUser) {
+            if(!user) return;
+            document.getElementById('profileAvatar').src = user.photo;
+            document.getElementById('profileName').innerText = user.name;
+            document.getElementById('profileAdmission').innerText = `Admission No: ${user.admissionNo}`;
+            document.getElementById('profileMobile').innerText = user.mobile;
+            document.getElementById('profileDob').innerText = user.dob;
+            document.getElementById('profileAddress').innerText = user.address;
+            
+            const skillsDiv = document.getElementById('profileSkills');
+            if(user.skills && user.skills.length > 0) {
+                skillsDiv.innerHTML = user.skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
+            } else {
+                skillsDiv.innerText = 'No skills added.';
+            }
+        }
+
+        function populateTeacherProfile(user = currentUser) {
+            if(!user || !user.isTeacher) return;
+            document.getElementById('teacherAvatar').src = user.photo;
+            document.getElementById('teacherName').innerText = user.name;
+            document.getElementById('teacherDepartment').innerText = user.department || "Department of Science";
+            document.getElementById('teacherMobile').innerText = user.mobile;
+            document.getElementById('teacherEmail').innerText = user.email || "Not Available";
+            document.getElementById('teacherSubject').innerText = user.subject || "Not Available";
+            
+            const skillsDiv = document.getElementById('teacherSkills');
+            if(user.skills && user.skills.length > 0) {
+                skillsDiv.innerHTML = user.skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
+            } else {
+                skillsDiv.innerText = 'No skills added.';
+            }
+        }
+
+        function openSkillsModal() {
+            if(!currentUser) return;
+            document.getElementById('skillsInput').value = currentUser.skills ? currentUser.skills.join(', ') : '';
+            document.getElementById('skillsModal').classList.add('show');
+        }
+
+        function saveSkills() {
+            if(!currentUser) return;
+            const raw = document.getElementById('skillsInput').value;
+            currentUser.skills = raw.split(',').map(s => s.trim()).filter(s => s !== '');
+            populateProfile();
+            closeModal('skillsModal');
+            showToast('Skills updated', 'success');
+        }
+
+        function openTeacherSkillsModal() {
+            if(!currentUser) return;
+            document.getElementById('teacherSkillsInput').value = currentUser.skills ? currentUser.skills.join(', ') : '';
+            document.getElementById('teacherSkillsModal').classList.add('show');
+        }
+
+        function saveTeacherSkills() {
+            if(!currentUser) return;
+            const raw = document.getElementById('teacherSkillsInput').value;
+            currentUser.skills = raw.split(',').map(s => s.trim()).filter(s => s !== '');
+            populateTeacherProfile();
+            closeModal('teacherSkillsModal');
+            showToast('Skills updated', 'success');
+        }
+
+        // ================= SPONSORSHIP LOGIC (OUTPUT) =================
+        function handleSponsor(e) {
+            e.preventDefault();
+            
+            const newSponsor = {
+                id: Date.now(),
+                name: document.getElementById('sponsorName').value,
+                organization: document.getElementById('sponsorOrganization').value || 'Individual',
+                email: document.getElementById('sponsorEmail').value,
+                phone: document.getElementById('sponsorPhone').value,
+                type: document.getElementById('sponsorshipType').value,
+                duration: document.getElementById('sponsorshipDuration').value,
+                amount: document.getElementById('sponsorshipAmount').value,
+                students: document.getElementById('preferredStudents').value,
+                message: document.getElementById('sponsorMessage').value,
+                contactMethod: document.getElementById('preferredContact').value,
+                status: 'Pending',
+                date: new Date().toISOString().split('T')[0]
+            };
+
+            sponsorships.push(newSponsor);
+            renderSponsorshipRequests();
+            
+            closeModal('sponsorshipModal');
+            showToast('Application Received! We will contact you soon.', 'success');
+        }
+
+        function renderSponsorshipRequests() {
+            const tbody = document.getElementById('sponsorshipTableBody');
+            if(!tbody) return;
+
+            if(sponsorships.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#888;">No applications received yet.</td></tr>';
+                return;
+            }
+
+            const sorted = [...sponsorships].sort((a,b) => b.id - a.id);
+
+            tbody.innerHTML = sorted.map(s => `
+                <tr>
+                    <td>${s.date}</td>
+                    <td><strong>${s.name}</strong></td>
+                    <td>${s.organization}</td>
+                    <td>${s.type}</td>
+                    <td>${s.amount}</td>
+                    <td>${s.email}</td>
+                    <td>${s.phone}</td>
+                    <td><span style="padding: 4px 8px; border-radius: 4px; background-color: ${s.status === 'Pending' ? '#ff9800' : '#4caf50'}; color: white; font-size: 0.8rem;">${s.status}</span></td>
+                    ${currentUser && currentUser.isAdmin ? `<td style="text-align:center;">
+                        <button class="btn-sm btn-danger" onclick="deleteSponsor(${s.id})">Delete</button>
+                    </td>` : ''}
+                </tr>
+            `).join('');
+        }
+
+        function deleteSponsor(id) {
+            if(!currentUser || !currentUser.isAdmin) return;
+            if(!confirm("Delete this request?")) return;
+            
+            sponsorships = sponsorships.filter(s => s.id !== id);
+            renderSponsorshipRequests();
+            showToast('Application deleted.', 'info');
+        }
+
+        function openSponsorshipForm() {
+            document.getElementById('sponsorshipForm').reset();
+            document.getElementById('sponsorshipModal').classList.add('show');
+        }
+
+        // ================= UTILITIES =================
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('show');
+        }
+
+        function showToast(msg, type='info') {
+            const t = document.getElementById('toast');
+            const txt = document.getElementById('toastMessage');
+            t.className = `toast ${type} show`;
+            txt.innerText = msg;
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        function showQRModal(platform) {
+            document.getElementById('qrCodeImage').src = socialData[platform];
+            document.getElementById('qrModal').classList.add('show');
+        }
+
+        window.onclick = function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('show');
+            }
+        }
+    </script>
+</body>
+</html>
